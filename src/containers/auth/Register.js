@@ -8,6 +8,7 @@ class Register extends Component {
   state = {
     email: '',
     password: '',
+    password_confirmation: '',
     name: ''
   };
 
@@ -19,7 +20,9 @@ class Register extends Component {
     let registerData = {
       email: this.state.email,
       password: this.state.password,
+      password_confirmation: this.state.password_confirmation,
       name: this.state.name
+
     };
     this.props.register(registerData);
   };
@@ -40,6 +43,12 @@ class Register extends Component {
             placeholder="Password"
             value={this.state.password}
             onChange={this.handleInputChange('password')}
+          />
+          <input
+            type="password"
+            placeholder="Password Confirmation"
+            value={this.state.password_confirmation}
+            onChange={this.handleInputChange('password_confirmation')}
           />
           <input
             type="text"
