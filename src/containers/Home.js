@@ -7,13 +7,12 @@ import { getMovies, getMoviesByPage, getMoviesCount } from '../store/actions/Mov
 import MovieCard from '../component/MovieCard';
 
 class Home extends Component {
-  
+  state ={
+    offset : 0,
+  }
   componentDidMount() {
     this.props.getMoviesCount();
     this.props.getMoviesByPage({offset: 0, take:5});
-  }
-  state ={
-    offset : 0,
   }
   renderMovies = () => {
     return this.props.movies.map(movie => <MovieCard key={movie.id} movie={movie} />);

@@ -16,5 +16,4 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIES_COUNT);
   }
 }
-
 export const movieService = new MovieService();
