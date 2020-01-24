@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
-import { setMovies } from '../actions/MovieActions';
+import { setMovies, setMovie } from '../actions/MovieActions';
 
 export function* moviesGet() {
   try {
@@ -11,4 +11,8 @@ export function* moviesGet() {
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
+}
+export function* getMovieById({payload}){
+  const {data} = yield call(movieService.getMovieById, payload.id);
+  yield put(setMovie(data));
 }

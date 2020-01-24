@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import { getMovies } from '../store/actions/MovieActions';
 import MovieCard from '../component/MovieCard';
@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   renderMovies = () => {
-    return this.props.movies.map(movie => <MovieCard key={movie.id} movie={movie} />);
+    return this.props.movies.map(movie => <Link to={"/movie/"+ movie.id}><MovieCard key={movie.id} movie={movie} /></Link>);
   };
 
   render() {
