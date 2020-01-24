@@ -3,23 +3,18 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { getMovies } from '../store/actions/MovieActions';
-import MovieCard from '../component/MovieCard';
+import MovieList from '../component/MovieList';
 
 class Home extends Component {
   componentDidMount() {
     this.props.getMovies();
   }
-
-  renderMovies = () => {
-    return this.props.movies.map(movie => <MovieCard key={movie.id} movie={movie} />);
-  };
-
   render() {
     return (
-      <div>
-        <p>Welcome to Pocket IMDb</p>
-        <h4>Movies</h4>
-        {this.renderMovies()}
+      <div style={{textAlign: 'center'}}>
+        <h1 style={{margin:'auto', marginTop:'1%'}}>Welcome to Pocket IMDb</h1>
+        <h2 style={{margin:'auto', marginBottom:'2%'}}>Movies</h2>
+        <MovieList movies={this.props.movies}/>
       </div>
     );
   }
