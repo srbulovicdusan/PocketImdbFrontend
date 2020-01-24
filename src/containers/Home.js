@@ -12,14 +12,14 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesCount();
-    this.props.getMoviesByPage({offset: 0, take:5});
+    this.props.getMoviesByPage({page: 0, perPage:5});
   }
   renderMovies = () => {
     return this.props.movies.map(movie => <MovieCard key={movie.id} movie={movie} />);
   };
   handleClick(offset) {
     this.setState({offset});
-    this.props.getMoviesByPage({offset: offset, take:5});
+    this.props.getMoviesByPage({page: offset/5, perPage:5});
 
   }
   render() {

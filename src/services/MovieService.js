@@ -10,7 +10,7 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIES);
   };
   getMoviesByPage = payload => {
-    return this.apiClient.get(ENDPOINTS.MOVIES + "?offset=" + payload.offset +"&take=" + payload.take);
+    return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage);
   }
   getMoviesCount = () =>{
     return this.apiClient.get(ENDPOINTS.MOVIES_COUNT);
