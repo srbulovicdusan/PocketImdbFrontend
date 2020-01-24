@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,20 +6,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {
-  Link
-} from "react-router-dom";
 
 import { history } from '../App';
 const MovieCard = ({ movie }) => {
-  
-  const classes = useStyles();
+  const cutDescriptionIfTooLarge = description =>{
+    return description.length < 100 ?  description : description.slice(0, 100) + "...";
+  }
   return (
-      <Card className={classes.card}>
+      <Card style={classes.card}>
       <CardActionArea
         onClick = {()=> history.push("/movie/" + movie.id)}>
         <CardMedia
-          className={classes.media}
+          style={classes.media}
           image={movie.image_url}
           title={movie.title}
         />
@@ -29,7 +26,7 @@ const MovieCard = ({ movie }) => {
             {movie.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {movie.description.length < 100 ?  movie.description : movie.description.slice(0, 100) + "..."}
+            {cutDescriptionIfTooLarge(movie.description)}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -44,13 +41,14 @@ const MovieCard = ({ movie }) => {
     </Card>
   );
 };
-const useStyles = makeStyles({
+const classes = {
   card: {
     maxWidth: 345,
     margin: "1%"
   },
   media: {
     height: 140,
-  },
-});
+  }
+};
+
 export default MovieCard;
