@@ -5,11 +5,13 @@ import Grid from '@material-ui/core/Grid';
 class MovieList extends React.Component{
 
     renderMovies = () => {
-    return this.props.movies.map((movie, index) => 
-            index < 6 ? <Grid item key={movie.id} xs={4}><MovieCard movie={movie}/></Grid>
-                      : <Grid item key={movie.id} xs={3}><MovieCard movie={movie}/></Grid>)
+        return this.props.movies.map((movie, index) => 
+             <Grid item key={movie.id} xs={index < 6 ? 4 : 3}><MovieCard movie={movie}/></Grid>
+        )
+    }
+                      
                 
-    };
+    
     render() {
         return (
             <Grid style={{paddingLeft:'7%', paddingRight:'7%', width:'97%'}} justify="center" container spacing={4}>
