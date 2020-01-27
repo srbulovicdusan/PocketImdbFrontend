@@ -9,6 +9,7 @@
     "connected-react-router": "^6.3.1",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.11",
+    "material-ui-flat-pagination": "^4.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
