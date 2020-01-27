@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Pagination from "material-ui-flat-pagination";
+
 
 import MovieList from '../component/MovieList';
 

@@ -25,7 +25,6 @@ class AppLayout extends React.Component {
       <div>
         <Route exact path="/home" component={Home} />
         <Route exact path="/movie/:id" component={SingleMovie}/>
-
       </div>
     ) : (
       <div>

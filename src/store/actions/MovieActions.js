@@ -10,6 +10,12 @@ export const getMovies = () => {
     type: GET_MOVIES
   };
 };
+export const getMovieById = (payload) => {
+  return {
+    type: GET_MOVIE_BY_ID,
+    payload
+  };
+};
 
 export const setMovies = payload => {
   return {
@@ -17,6 +23,11 @@ export const setMovies = payload => {
     payload
   };
 };
+
+export const setMovie = payload => {
+  return {
+    type: SET_MOVIE,
+
 export const getMoviesCount = () =>{
   return {
     type : GET_MOVIES_COUNT
