@@ -12,7 +12,7 @@ class MovieService extends ApiService {
 
   getMovieById = id =>{
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
-
+  }
   getMoviesByPage = payload => {
     return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage);
   }

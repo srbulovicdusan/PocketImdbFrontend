@@ -7,7 +7,6 @@ import Pagination from "material-ui-flat-pagination";
 import MovieList from '../component/MovieList';
 
 import { getMovies, getMoviesByPage, getMoviesCount } from '../store/actions/MovieActions';
-import MovieCard from '../component/MovieCard';
 
 
 class Home extends Component {
@@ -16,21 +15,22 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesCount();
-    this.props.getMoviesByPage({page: 0, perPage:5});
+    this.props.getMoviesByPage({page: 0, perPage:10});
   }
   handleClick(offset) {
     this.setState({offset});
-    this.props.getMoviesByPage({page: offset/5, perPage:5});
+    this.props.getMoviesByPage({page: offset/10, perPage:10});
   }
   render() {
     return (
-      <div>
-        <p>Welcome to Pocket IMDb</p>
-        <h4>Movies</h4>
+      <div style={classes.container}>
+        <h1>Welcome to Pocket IMDb</h1>
+        <h2>Movies</h2>
         <MovieList movies={this.props.movies}/>
 
         <Pagination
-          limit={5}
+          style={classes.pagination}
+          limit={10}
           offset={this.state.offset}
           total={this.props.count}
           onClick={(e, offset) => this.handleClick(offset)}
@@ -39,7 +39,15 @@ class Home extends Component {
     );
   }
 }
-
+const classes = {
+  container: {
+    textAlign: 'center'
+  },
+  pagination:{
+    margin: 'auto',
+    marginTop: '3%'
+  }
+}
 const mapStateToProps = state => {
   return {
     movies: state.movie.all,

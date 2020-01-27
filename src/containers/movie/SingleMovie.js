@@ -8,7 +8,7 @@ import { getMovieById } from '../../store/actions/MovieActions';
 
 class SingleMovie extends Component{
     
-    componentDidMount(){
+    componentDidMount(){        
         //UKOLIKO NIJE PRONASAO U STORE-u SALJE REQUEST BACKENDU
         if (this.props.movie == null){
             this.props.getMovieById({id:this.props.match.params.id});

@@ -9,9 +9,6 @@ class MovieList extends React.Component{
              <Grid item key={movie.id} xs={index < 6 ? 4 : 3}><MovieCard movie={movie}/></Grid>
         )
     }
-                      
-                
-    
     render() {
         return (
             <Grid style={{paddingLeft:'7%', paddingRight:'7%', width:'97%'}} justify="center" container spacing={4}>
