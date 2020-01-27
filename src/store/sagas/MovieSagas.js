@@ -16,7 +16,6 @@ export function* moviesGet() {
   }
 }
 export function* getMovieById({payload}){
-  console.log("neee")
   const {data} = yield call(movieService.getMovieById, payload.id);
   yield put(setMovie(data));
 }
@@ -32,4 +31,9 @@ export function* goToMovieDetails(action){
   yield put(setMovie(action.payload));
   //yield put(push('/movie/' + action.payload.id));
   //yield put(go());
+}
+export function* increaseMovieVisits(action){
+  const {data} = yield call(movieService.increaseMovieVisits, action.payload);
+  //asd
+  yield put(setMovie(data));
 }

@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 
-import { getMovieById } from '../../store/actions/MovieActions';
+import { getMovieById, increaseMovieVisits } from '../../store/actions/MovieActions';
 
 class SingleMovie extends Component{
     
@@ -13,6 +13,7 @@ class SingleMovie extends Component{
         if (this.props.movie == null){
             this.props.getMovieById({id:this.props.match.params.id});
         }
+        this.props.increaseMovieVisits({id: this.props.match.params.id});
     }
     render(){   
         return this.props.movie?
@@ -21,6 +22,7 @@ class SingleMovie extends Component{
                     <Grid style={classes.gtidItem} item xs={9}>
                         <Paper style={classes.movieDetail}>
                             <h1>{this.props.movie.title}</h1>
+                            <p>views: {this.props.movie.num_of_visits}</p>
                             <Grid container spacing={3}>
                                 <Grid style={classes.gtidItem} item xs={3}>
                                     <CardMedia
@@ -72,6 +74,7 @@ const mapStateToProps = (state) => {
     return {movie: state.movie.selectedMovie}
 };
 const mapDispatchToProps = {
-    getMovieById
+    getMovieById,
+    increaseMovieVisits
   };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)
