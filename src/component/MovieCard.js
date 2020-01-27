@@ -53,5 +53,14 @@ const classes = {
     height: 140,
   }
 };
+const classes = {
+  card: {
+    maxWidth: 345,
+    margin: "1%"
+  },
+  media: {
+    height: 140,
+  }
+};
 
 export default MovieCard;
