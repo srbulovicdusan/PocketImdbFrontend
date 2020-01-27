@@ -7,39 +7,51 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import { history } from '../App';
-const MovieCard = ({ movie }) => {
-  const cutDescriptionIfTooLarge = description =>{
-    return description.length < 100 ?  description : description.slice(0, 100) + "...";
+class MovieCard extends React.Component {
+    cutDescriptionIfTooLarge = description =>{
+      return description.length < 90 ?  description : description.slice(0, 90) + "...";
+    }    
+
+  render(){
+
+    return (
+        <Card style={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              style={classes.media}
+              image={this.props.movie.image_url}
+              title={this.props.movie.title}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.props.movie.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {this.cutDescriptionIfTooLarge(this.props.movie.description)}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              Share
+            </Button>
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
+      </Card>
+    );
+}
+};
+const classes = {
+  card: {
+    maxWidth: 500,
+    minHeight : 'auto',
+    maxHeight : 'auto'
+  },
+  media: {
+    height: 140,
   }
-  return (
-      <Card style={classes.card}>
-      <CardActionArea
-        onClick = {()=> history.push("/movie/" + movie.id)}>
-        <CardMedia
-          style={classes.media}
-          image={movie.image_url}
-          title={movie.title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {movie.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {cutDescriptionIfTooLarge(movie.description)}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  );
 };
 const classes = {
   card: {
