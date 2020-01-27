@@ -69,14 +69,7 @@ const classes = {
     }
 
 }
-const mapStateToProps = (state, props) => {
-    //PROVERI DA LI SE NALAZI U STORE-U
-    let movieId = props.match.params.id;
-    for (let movie of state.movie.all){
-        if (movie.id == movieId){
-            return {movie: movie};
-        }
-    }
+const mapStateToProps = (state) => {
     return {movie: state.movie.selectedMovie}
 };
 const mapDispatchToProps = {

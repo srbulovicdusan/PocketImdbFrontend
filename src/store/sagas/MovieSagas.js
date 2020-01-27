@@ -6,9 +6,8 @@ import { setMovies, setMovie } from '../actions/MovieActions';
 export function* moviesGet() {
   try {
     const { data } = yield call(movieService.getMovies);
-
     yield put(setMovies(data));
-  } catch (error) {
+  } catch (error){
     console.log({ error }); /*eslint-disable-line*/
   }
 }
