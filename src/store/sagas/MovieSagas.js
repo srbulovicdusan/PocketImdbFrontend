@@ -1,9 +1,9 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
 
 import { movieService } from '../../services/MovieService';
 
-import { setMovies, setMoviesCount, setMovie } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, setCurrentPage } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -16,20 +16,25 @@ export function* moviesGet() {
   }
 }
 export function* getMovieById({payload}){
-  console.log("neee")
   const {data} = yield call(movieService.getMovieById, payload.id);
   yield put(setMovie(data));
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
     yield put(setMovies(data));
+    yield put(setCurrentPage(action.payload.page));
 }
 export function* moviesGetCount(){
     const {data} = yield call(movieService.getMoviesCount);
     yield put(setMoviesCount(data));
 }
-export function* goToMovieDetails(action){
+export function* setSelectedMovie(action){
   yield put(setMovie(action.payload));
-  //yield put(push('/movie/' + action.payload.id));
-  //yield put(go());
+}
+export function* handleMovieSearch(action){
+    yield delay(750);
+    if (action.payload !== ''){
+      const {data} = yield call(movieService.searchMovie, action.payload);
+      yield put(setMovies(data));
+    }
 }

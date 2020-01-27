@@ -1,4 +1,14 @@
-import { GET_MOVIES, SET_MOVIES, GET_MOVIES_BY_PAGE, SET_MOVIES_COUNT, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, SET_MOVIE, GO_TO_MOVIE_DETAILS} from './ActionTypes';
+import { 
+  GET_MOVIES, 
+  SET_MOVIES, 
+  GET_MOVIES_BY_PAGE, 
+  SET_MOVIES_COUNT, 
+  GET_MOVIES_COUNT, 
+  GET_MOVIE_BY_ID, 
+  SET_MOVIE, 
+  SET_SELECTED_MOVIE,
+  SET_CURRENT_PAGE,
+  SEARCH_INPUT_CHANGED} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -41,9 +51,21 @@ export const setMoviesCount = (payload) =>{
     payload
   };
 };
-export const goToMovieDetails = (payload) =>{
+export const setSelectedMovie = (payload) =>{
   return {
-    type: GO_TO_MOVIE_DETAILS,
+    type: SET_SELECTED_MOVIE,
     payload
   };
+}
+export const searchInputChanged = payload =>{
+  return {
+    type: SEARCH_INPUT_CHANGED,
+    payload
+  }
+}
+export const setCurrentPage = (payload) =>{
+  return {
+    type: SET_CURRENT_PAGE,
+    payload
+  }
 }

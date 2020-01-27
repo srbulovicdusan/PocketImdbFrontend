@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { LOGIN, REGISTER, GET_MOVIES, GET_MOVIES_BY_PAGE, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, GO_TO_MOVIE_DETAILS } from '../actions/ActionTypes';
+import { LOGIN, REGISTER, GET_MOVIES, GET_MOVIES_BY_PAGE, GET_MOVIES_COUNT, GET_MOVIE_BY_ID,SET_SELECTED_MOVIE, SEARCH_INPUT_CHANGED } from '../actions/ActionTypes';
 import { userLogin, userRegister } from './AuthSagas';
-import { moviesGet, moviesGetByPage , moviesGetCount, getMovieById, goToMovieDetails} from './MovieSagas';
+import { moviesGet, moviesGetByPage , moviesGetCount, getMovieById,setSelectedMovie, handleMovieSearch} from './MovieSagas';
 
 
 export default function* rootSaga() {
@@ -12,6 +12,7 @@ export default function* rootSaga() {
     takeLatest(GET_MOVIE_BY_ID, getMovieById),
     takeLatest(GET_MOVIES_BY_PAGE, moviesGetByPage),
     takeLatest(GET_MOVIES_COUNT, moviesGetCount),
-    takeLatest(GO_TO_MOVIE_DETAILS, goToMovieDetails)
+    takeLatest(SET_SELECTED_MOVIE, setSelectedMovie),
+    takeLatest(SEARCH_INPUT_CHANGED, handleMovieSearch),
   ]);
 }

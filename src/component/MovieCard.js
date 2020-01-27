@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 
-import {goToMovieDetails} from '../store/actions/MovieActions'
+import {setSelectedMovie} from '../store/actions/MovieActions'
 class MovieCard extends React.Component {
     cutDescriptionIfTooLarge = description =>{
       return description.length < 90 ?  description : description.slice(0, 90) + "...";
     }    
     goToMovieDetails = () => {
-      this.props.goToMovieDetails(this.props.movie);
+      this.props.setSelectedMovie(this.props.movie);
     }
   render(){
 
@@ -81,6 +81,6 @@ const classes = {
   }
 };
 const mapDispatchToProps = {
-    goToMovieDetails
+    setSelectedMovie
 };
 export default connect(null, mapDispatchToProps)(MovieCard);
