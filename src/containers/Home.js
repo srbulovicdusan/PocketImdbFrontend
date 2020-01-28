@@ -26,7 +26,7 @@ class Home extends Component {
       <div style={classes.container}>
         <h1>Welcome to Pocket IMDb</h1>
         <h2>Movies</h2>
-        <MovieList movies={this.props.movies}/>
+        <MovieList />
 
         <Pagination
           style={classes.pagination}
@@ -50,7 +50,6 @@ const classes = {
 }
 const mapStateToProps = state => {
   return {
-    movies: state.movie.all,
     count: state.movie.count
   };
 };

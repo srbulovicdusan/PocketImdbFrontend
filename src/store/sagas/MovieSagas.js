@@ -3,7 +3,7 @@ import { push, go, navigate } from 'connected-react-router';
 
 import { movieService } from '../../services/MovieService';
 
-import { setMovies, setMoviesCount, setMovie } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putMovieReaction } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -32,4 +32,12 @@ export function* goToMovieDetails(action){
   yield put(setMovie(action.payload));
   //yield put(push('/movie/' + action.payload.id));
   //yield put(go());
+}
+export function* postMovieReaction(action){
+    try{
+      const {data} = yield call(movieService.postMovieReaction, action.payload);
+      yield put(putMovieReaction(data));
+    }catch{
+
+    }
 }

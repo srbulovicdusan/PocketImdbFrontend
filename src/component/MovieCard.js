@@ -8,18 +8,41 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import IconButton from '@material-ui/core/IconButton';
 
-import {goToMovieDetails} from '../store/actions/MovieActions'
+
+import {goToMovieDetails, postMovieReaction} from '../store/actions/MovieActions'
 class MovieCard extends React.Component {
+    
     cutDescriptionIfTooLarge = description =>{
       return description.length < 90 ?  description : description.slice(0, 90) + "...";
     }    
     goToMovieDetails = () => {
       this.props.goToMovieDetails(this.props.movie);
     }
+    countMovieLikes = () =>{
+      console.log("osvezio props", this.props);
+      return this.props.movie.reactions.filter(reaction =>{
+          return reaction.type === 'LIKE';
+      }).length;
+      //return likes.length;
+    }
+    countMovieDislikes = () => {
+      let dislikes = this.props.movie.reactions.filter(reaction =>{
+          return reaction.type === 'DISLIKE';
+      });
+      return dislikes.length;
+    }
+    handleLike = () =>{
+      this.props.postMovieReaction({movie_id : this.props.movie.id, type: "LIKE"});
+    }
+    handleDislike =() =>{
+      this.props.postMovieReaction({movie_id : this.props.movie.id, type: "DISLIKE"});
+    }
   render(){
-
-    return (
+    return (        
         <Card style={classes.card}>
           <Link style={{ color:'black', textDecoration: 'none'}}to={"/movie/" + this.props.movie.id}>
           <CardActionArea onClick={this.goToMovieDetails}>
@@ -40,12 +63,15 @@ class MovieCard extends React.Component {
           </Link >
 
           <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
+            <IconButton onClick={this.handleLike} size="small">
+              <ThumbUpIcon fontSize="inherit" />
+              
+            </IconButton>
+            {this.countMovieLikes()}
+            <IconButton onClick={this.handleDislike}aria-label="delete"  size="small">
+              <ThumbDownIcon fontSize="inherit" />
+            </IconButton>
+            {this.countMovieDislikes()}
           </CardActions>
       </Card>
     );
@@ -81,6 +107,7 @@ const classes = {
   }
 };
 const mapDispatchToProps = {
-    goToMovieDetails
+    goToMovieDetails,
+    postMovieReaction
 };
 export default connect(null, mapDispatchToProps)(MovieCard);
