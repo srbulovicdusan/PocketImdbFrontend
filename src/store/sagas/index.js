@@ -11,7 +11,6 @@ export default function* rootSaga() {
     takeLatest(GET_MOVIES, moviesGet),
     takeLatest(GET_MOVIE_BY_ID, getMovieById),
     takeLatest(GET_MOVIES_BY_PAGE, moviesGetByPage),
-    takeLatest(GET_MOVIES_COUNT, moviesGetCount),
     takeLatest(SET_SELECTED_MOVIE, setSelectedMovie),
     takeLatest(SEARCH_INPUT_CHANGED, handleMovieSearch),
   ]);

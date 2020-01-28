@@ -14,7 +14,7 @@ class MovieCard extends React.Component {
     cutDescriptionIfTooLarge = description =>{
       return description.length < 90 ?  description : description.slice(0, 90) + "...";
     }    
-    goToMovieDetails = () => {
+    setSelectedMovie = () => {
       this.props.setSelectedMovie(this.props.movie);
     }
   render(){
@@ -22,7 +22,7 @@ class MovieCard extends React.Component {
     return (
         <Card style={classes.card}>
           <Link style={{ color:'black', textDecoration: 'none'}}to={"/movie/" + this.props.movie.id}>
-          <CardActionArea onClick={this.goToMovieDetails}>
+          <CardActionArea onClick={this.setSelectedMovie}>
             <CardMedia
               style={classes.media}
               image={this.props.movie.image_url}

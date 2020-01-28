@@ -9,7 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 import MovieList from '../component/MovieList';
 
-import { getMovies, getMoviesByPage, getMoviesCount, searchInputChanged } from '../store/actions/MovieActions';
+import { getMovies, getMoviesByPage, searchInputChanged } from '../store/actions/MovieActions';
 
 
 class Home extends Component {
@@ -18,7 +18,6 @@ class Home extends Component {
     searchInput: '',
   }
   componentDidMount() {
-    this.props.getMoviesCount();
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10});
   }
   handleClick(offset) {
@@ -89,7 +88,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getMovies,
   getMoviesByPage,
-  getMoviesCount,
   searchInputChanged
 };
 

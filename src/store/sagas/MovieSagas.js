@@ -21,8 +21,10 @@ export function* getMovieById({payload}){
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
-    yield put(setMovies(data));
-    yield put(setCurrentPage(action.payload.page));
+    yield put(setMovies(data.movies));
+    yield put(setCurrentPage(data.page));
+    yield put(setMoviesCount(data.perPage*data.totalPages));
+
 }
 export function* moviesGetCount(){
     const {data} = yield call(movieService.getMoviesCount);
