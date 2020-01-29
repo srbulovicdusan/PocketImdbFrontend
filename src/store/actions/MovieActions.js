@@ -1,4 +1,4 @@
-import { GET_MOVIES, SET_MOVIES, GET_MOVIES_BY_PAGE, SET_MOVIES_COUNT, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, SET_MOVIE, GO_TO_MOVIE_DETAILS} from './ActionTypes';
+import { GET_MOVIES, SET_MOVIES, GET_MOVIES_BY_PAGE, SET_MOVIES_COUNT, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, SET_MOVIE, GO_TO_MOVIE_DETAILS,GET_ALL_GENRES, PUT_GENRES, PUT_SELECTED_GENRE, DELETE_SELECTED_GENRE} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -46,4 +46,27 @@ export const goToMovieDetails = (payload) =>{
     type: GO_TO_MOVIE_DETAILS,
     payload
   };
+}
+export const getAllGenres = () =>{
+  return {
+    type: GET_ALL_GENRES
+  };
+}
+export const putGenres = (payload) =>{
+  return {
+    type: PUT_GENRES,
+    payload
+  };
+}
+export const putSelectedGenre = (payload) =>{
+  return {
+    type: PUT_SELECTED_GENRE,
+    payload
+  }
+}
+export const deleteSelectedGenre = (payload) =>{
+  return {
+    type: DELETE_SELECTED_GENRE,
+    payload
+  }
 }
