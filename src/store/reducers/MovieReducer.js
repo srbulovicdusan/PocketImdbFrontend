@@ -17,10 +17,12 @@ const movieReducer = (state = initialState, action) => {
       return {...state, count: action.payload};
     case PUT_MOVIE_REACTION:
       const movieIndex = state.all.findIndex((movie) => movie.id === action.payload.movie_id)
-      const movie = state.all[movieIndex]      
+      const movie = state.all[movieIndex]     
+      const newSelectedMovie = state.selectedMovie && state.selectedMovie.id == action.payload.movie_id ? {...state.selectedMovie, reactions : [...state.selectedMovie.reactions, action.payload]} : state.selectedMovie
       return {
         ...state,
-        selectedMovie: state.selectedMovie ? {...state.selectedMovie, reactions : [...state.selectedMovie.reactions, action.payload]} : state.selectedMovie,
+        selectedMovie: newSelectedMovie,
+            
         all: [
           ...state.all.slice(0, movieIndex),
           {
