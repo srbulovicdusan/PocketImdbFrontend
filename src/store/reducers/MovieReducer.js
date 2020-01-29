@@ -1,9 +1,16 @@
-import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
   count : 0,
-  selectedMovie:null,
+  selectedMovie:{
+    id: "",
+    title:"",
+    description:"",
+    image_url:"",
+    reactions: [],
+    comments: []
+  },
 
 };
 const movieReducer = (state = initialState, action) => {
@@ -11,9 +18,11 @@ const movieReducer = (state = initialState, action) => {
     case SET_MOVIES:
       return { ...state, all: action.payload };
     case SET_MOVIE:
-      return {...state, selectedMovie: action.payload}
+      return {...state, selectedMovie: {...state.selectedMovie, ...action.payload}}
     case SET_MOVIES_COUNT:
       return {...state, count: action.payload};
+    case PUT_COMMENTS:
+      return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, ...action.payload]}}
     default:
       return state;
   }
