@@ -14,7 +14,7 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
-        this.props.getCommentsByMovie({id:this.props.match.params.id});
+        //this.props.getCommentsByMovie({id:this.props.match.params.id});
     }
     render(){   
         return this.props.movie?

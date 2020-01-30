@@ -17,7 +17,9 @@ export function* moviesGet() {
 }
 export function* getMovieById({payload}){
   const {data} = yield call(movieService.getMovieById, payload.id);
+  const comments = yield call(commentService.getAllByMovie, payload);
   yield put(setMovie(data));
+  yield put(putComments(comments.data));
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)

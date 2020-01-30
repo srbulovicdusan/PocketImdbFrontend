@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
 class Comment extends React.Component{
-
-    
     render() {
         return (
             <div>
