@@ -13,7 +13,6 @@ class CommentService extends ApiService {
     return this.apiClient.get(ENDPOINTS.COMMENTS + "/" + payload.id);
   }
   postComment = (payload) => {
-      console.log(payload);
       return this.apiClient.post(ENDPOINTS.COMMENTS, payload);
   }
   setAuthorizationHeader = () => {

@@ -34,7 +34,6 @@ export function* moviesGetCount(){
 export function* setSelectedMovie(action){
   yield put(setMovie(action.payload));
   const comments = yield call(commentService.getAllByMovie, action.payload);
-  console.log(action.payload.id, comments.data);
   yield put(putComments(comments.data));
 
 
