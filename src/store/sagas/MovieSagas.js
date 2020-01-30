@@ -1,9 +1,8 @@
 import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
-
 import { movieService } from '../../services/MovieService';
-
-import { setMovies, setMoviesCount, setMovie, setCurrentPage } from '../actions/MovieActions';
+import {commentService} from '../../services/CommentService';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -17,7 +16,9 @@ export function* moviesGet() {
 }
 export function* getMovieById({payload}){
   const {data} = yield call(movieService.getMovieById, payload.id);
+  const comments = yield call(commentService.getAllByMovie, payload);
   yield put(setMovie(data));
+  yield put(putComments(comments.data));
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
@@ -39,4 +40,17 @@ export function* handleMovieSearch(action){
       const {data} = yield call(movieService.searchMovie, action.payload);
       yield put(setMovies(data));
     }
+}
+export function* commentsGet(action){
+  const {data} = yield call(commentService.getAllByMovie, action.payload);
+  yield put(putComments(data));
+}
+export function* postComment(action){
+  const {data} = yield call(commentService.postComment, action.payload);
+  yield put(putComments([data]));
+}
+export function* increaseMovieVisits(action){
+  const {data} = yield call(movieService.increaseMovieVisits, action.payload);
+  //asd
+  yield put(setMovie(data));
 }

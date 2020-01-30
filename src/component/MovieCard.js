@@ -34,7 +34,13 @@ class MovieCard extends React.Component {
               </Typography>
               <Typography style={classes.description} variant="body2" color="textSecondary" component="p">
                 {this.cutDescriptionIfTooLarge(this.props.movie.description)}
+                <br/>
               </Typography>
+              <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
+                  {'views: ' + this.props.movie.num_of_visits}
+
+              </Typography>
+
             </CardContent>
           </CardActionArea>
           </Link >
@@ -51,21 +57,17 @@ class MovieCard extends React.Component {
     );
 }
 };
-// const classes = {
-//   card: {
-//     maxWidth: 500,
-//     minHeight : 'auto',
-//     maxHeight : 'auto'
-//   },
-//   media: {
-//     height: 140,
-//   }
-// };
+
 const classes = {
   card: {
     maxWidth: 345,
-    //maxHeight: 370,
     margin: "1%"
+  },
+  views:{
+    position: 'absolute',
+    bottom: 0,
+    left: '5%',
+    color: 'black',
   },
   title :{
     minHeight: 64,
