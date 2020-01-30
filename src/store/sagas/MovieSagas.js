@@ -40,3 +40,8 @@ export function* postComment(action){
   const {data} = yield call(commentService.postComment, action.payload);
   yield put(putComments([data]));
 }
+export function* increaseMovieVisits(action){
+  const {data} = yield call(movieService.increaseMovieVisits, action.payload);
+  //asd
+  yield put(setMovie(data));
+}

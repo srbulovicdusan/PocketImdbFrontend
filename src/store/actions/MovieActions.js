@@ -1,4 +1,17 @@
-import { GET_MOVIES, SET_MOVIES, GET_MOVIES_BY_PAGE, SET_MOVIES_COUNT, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, SET_MOVIE, GO_TO_MOVIE_DETAILS, GET_COMMENTS_BY_MOVIE, PUT_COMMENTS, POST_COMMENT} from './ActionTypes';
+import { 
+  GET_MOVIES,
+  SET_MOVIES, 
+  GET_MOVIES_BY_PAGE, 
+  SET_MOVIES_COUNT, 
+  GET_MOVIES_COUNT, 
+  GET_MOVIE_BY_ID, 
+  SET_MOVIE, 
+  GO_TO_MOVIE_DETAILS,
+  GET_COMMENTS_BY_MOVIE,
+  PUT_COMMENTS, 
+  POST_COMMENT,
+  INCREASE_MOVIE_VISITS} from './ActionTypes';
+
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -47,6 +60,7 @@ export const goToMovieDetails = (payload) =>{
     payload
   };
 }
+
 export const getCommentsByMovie = (payload)=>{
   return {
     type: GET_COMMENTS_BY_MOVIE,
@@ -62,6 +76,11 @@ export const putComments = (payload)=>{
 export const postComment = (payload)=>{
   return {
     type: POST_COMMENT,
+  };
+}
+export const increaseMovieVisits = (payload) =>{
+  return {
+    type: INCREASE_MOVIE_VISITS,
     payload
   };
 }

@@ -4,8 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import AddComment from '../../component/AddComment';
-import { getMovieById, getCommentsByMovie } from '../../store/actions/MovieActions';
 import CommentList from '../../component/CommentList';
+
+import { getMovieById,getCommentsByMovie, increaseMovieVisits } from '../../store/actions/MovieActions';
+
 
 class SingleMovie extends Component{
     
@@ -14,7 +16,11 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
+
         //this.props.getCommentsByMovie({id:this.props.match.params.id});
+
+        this.props.increaseMovieVisits({id: this.props.match.params.id});
+
     }
     render(){   
         return this.props.movie?
@@ -23,6 +29,7 @@ class SingleMovie extends Component{
                     <Grid style={classes.gtidItem} item xs={9}>
                         <Paper style={classes.movieDetail}>
                             <h1>{this.props.movie.title}</h1>
+                            <p>views: {this.props.movie.num_of_visits}</p>
                             <Grid container spacing={3}>
                                 <Grid style={classes.gtidItem} item xs={3}>
                                     <CardMedia
@@ -79,6 +86,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
     getMovieById,
+    increaseMovieVisits,
     getCommentsByMovie
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)

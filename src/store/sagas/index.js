@@ -1,7 +1,9 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { LOGIN, REGISTER, GET_MOVIES, GET_MOVIES_BY_PAGE, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, GO_TO_MOVIE_DETAILS, GET_COMMENTS_BY_MOVIE, POST_COMMENT } from '../actions/ActionTypes';
+
+import { LOGIN, REGISTER, GET_MOVIES, GET_MOVIES_BY_PAGE, GET_MOVIES_COUNT, GET_MOVIE_BY_ID, GO_TO_MOVIE_DETAILS, INCREASE_MOVIE_VISITS, GET_COMMENTS_BY_MOVIE, POST_COMMENT } from '../actions/ActionTypes';
 import { userLogin, userRegister } from './AuthSagas';
-import { moviesGet, moviesGetByPage , moviesGetCount, getMovieById, goToMovieDetails, commentsGet, postComment} from './MovieSagas';
+import { moviesGet, moviesGetByPage , moviesGetCount, getMovieById, goToMovieDetails, commentsGet, postComment, increaseMovieVisits} from './MovieSagas';
+
 
 
 export default function* rootSaga() {
@@ -15,5 +17,6 @@ export default function* rootSaga() {
     takeLatest(GO_TO_MOVIE_DETAILS, goToMovieDetails),
     takeLatest(GET_COMMENTS_BY_MOVIE, commentsGet),
     takeLatest(POST_COMMENT, postComment)
+    takeLatest(INCREASE_MOVIE_VISITS, increaseMovieVisits)
   ]);
 }
