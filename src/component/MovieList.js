@@ -11,7 +11,7 @@ class MovieList extends React.Component{
     }
     render() {
         return (
-            <Grid style={{paddingLeft:'7%', paddingRight:'7%', width:'97%'}} justify="center" container spacing={4}>
+            <Grid style={{ width:'97%'}} justify="center" container spacing={4}>
                 {this.renderMovies()}
             </Grid>
         );

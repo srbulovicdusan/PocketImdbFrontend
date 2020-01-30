@@ -31,6 +31,7 @@ class MovieCard extends React.Component {
             <CardContent>
               <Typography style={classes.title} gutterBottom variant="h5" component="h2">
                 {this.props.movie.title}
+                {this.props.movie.genre_id}
               </Typography>
               <Typography style={classes.description} variant="body2" color="textSecondary" component="p">
                 {this.cutDescriptionIfTooLarge(this.props.movie.description)}

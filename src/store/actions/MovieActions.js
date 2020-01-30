@@ -14,6 +14,10 @@ import {
   GET_COMMENTS_BY_MOVIE,
   PUT_COMMENTS, 
   POST_COMMENT,
+  GET_ALL_GENRES,
+  PUT_GENRES,
+  PUT_SELECTED_GENRE,
+  DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
@@ -106,4 +110,27 @@ export const increaseMovieVisits = (payload) =>{
     type: INCREASE_MOVIE_VISITS,
     payload
   };
+}
+export const getAllGenres = () =>{
+  return {
+    type: GET_ALL_GENRES
+  };
+}
+export const putGenres = (payload) =>{
+  return {
+    type: PUT_GENRES,
+    payload
+  };
+}
+export const putSelectedGenre = (payload) =>{
+  return {
+    type: PUT_SELECTED_GENRE,
+    payload
+  }
+}
+export const deleteSelectedGenre = (payload) =>{
+  return {
+    type: DELETE_SELECTED_GENRE,
+    payload
+  }
 }

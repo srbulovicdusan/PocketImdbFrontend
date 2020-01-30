@@ -6,10 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import GenreFilter from '../component/GenreFilter';
+import Paper from '@material-ui/core/Paper';
 
 import MovieList from '../component/MovieList';
 
-import { getMovies, getMoviesByPage, searchInputChanged } from '../store/actions/MovieActions';
+import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres } from '../store/actions/MovieActions';
 
 
 class Home extends Component {
@@ -37,7 +39,7 @@ class Home extends Component {
       <div style={classes.container}>
         <h1>Welcome to Pocket IMDb</h1>
         <h2>Movies</h2>
-        <TextField
+      <TextField
           onChange={this.handleInputChange}
           style={{margin:'1%'}}
           className={classes.margin}
@@ -51,8 +53,14 @@ class Home extends Component {
             ),
           }}
         />
-        <MovieList movies={this.props.movies}/>
-        
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+            <GenreFilter/>
+          </Grid>
+          <Grid item xs={10}>
+              <MovieList movies={this.props.movies}/>
+          </Grid>
+        </Grid>        
         
         {this.state.searchInput === '' ?
         <Pagination
@@ -81,6 +89,7 @@ const mapStateToProps = state => {
   return {
     movies: state.movie.all,
     count: state.movie.count,
+    selectedGenres: state.genre.selectedGenres,
     currentPage: state.movie.currentPage
   };
 };
@@ -88,6 +97,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   getMovies,
   getMoviesByPage,
+  getAllGenres,
   searchInputChanged
 };
 
