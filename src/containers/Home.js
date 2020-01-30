@@ -20,17 +20,17 @@ class Home extends Component {
     searchInput: '',
   }
   componentDidMount() {
-    this.props.getMoviesByPage({page: this.props.currentPage, perPage:10});
+    this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
   }
   handleClick(offset) {
     this.setState({offset});
-    this.props.getMoviesByPage({page: offset/10, perPage:10});
+    this.props.getMoviesByPage({page: offset/10, perPage:10, genreFilter: this.props.selectedGenres});
   }
   handleInputChange = (event) =>{
     this.setState({searchInput: event.target.value});
     this.props.searchInputChanged(event.target.value);
     if (event.target.value === ''){
-      this.props.getMoviesByPage({page:this.props.currentPage, perPage:10})
+      this.props.getMoviesByPage({page:this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres})
     }
   }
   render() {
@@ -98,7 +98,7 @@ const mapDispatchToProps = {
   getMovies,
   getMoviesByPage,
   getAllGenres,
-  searchInputChanged
+  searchInputChanged,
 };
 
 export default withRouter(

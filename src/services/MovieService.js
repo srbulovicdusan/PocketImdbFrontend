@@ -16,7 +16,8 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
   }
   getMoviesByPage = payload => {
-    let genresFilter = payload.genreFilter ? "&genreFilter=" + payload.genreFilter.join(',') : "";
+    console.log(payload.genreFilter);
+    let genresFilter = payload.genreFilter && payload.genreFilter.length >0 ? "&genreFilter=" + payload.genreFilter.join(',') : "";
     return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage + genresFilter);
   }
   getMoviesCount = () =>{

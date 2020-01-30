@@ -11,7 +11,6 @@ class GenreFilter extends React.Component{
     componentDidMount(){
         if (this.props.genres.length == 0){
             this.props.getAllGenres();
-            console.log("genres", this.props.genres)
         }
     }
     handleChange = (event) =>{
@@ -20,13 +19,15 @@ class GenreFilter extends React.Component{
         }else{
             this.props.deleteSelectedGenre(event.target.value);
         }
+
     }
-    handleFilters = ()=>{
-        this.props.getMoviesByPage({page: 0/10, perPage:10, genreFilter: this.props.selectedGenres});
-      }
+    handleChecked = (id) =>{
+        return this.props.selectedGenres.includes(id + "");
+    }
     renderMovieGenres = () =>{
         let genres = this.props.genres ?  this.props.genres.map(genre=> 
             <FormControlLabel
+                checked={this.handleChecked(genre.id)}
                 key={genre.id}
                 style={{width:'100%', marginLeft:'5px'}}
                 control={<Checkbox onClick={(event) => this.handleChange(event)} value={genre.id} />}
@@ -34,20 +35,16 @@ class GenreFilter extends React.Component{
             />) : null
         return genres;
     }
+    aplyFilters(){
+        this.props.getMoviesByPage({page: 0/10, perPage:10, genreFilter: this.props.selectedGenres});
+    }
     render() {
+        this.aplyFilters();
         return (
         <Paper style={{marginLeft:'20px'}}>
             Filters
             <br/>
             {this.renderMovieGenres()}
-            <br/>
-            <Button 
-                onClick={this.handleFilters}
-                style={{marginBottom:'10px'}}
-                variant="contained" 
-                color="primary">
-                Apply filters
-            </Button>
             </Paper>
         );
     }

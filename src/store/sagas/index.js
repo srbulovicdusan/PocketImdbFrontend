@@ -16,7 +16,6 @@ export default function* rootSaga() {
     takeLatest(SET_SELECTED_MOVIE, setSelectedMovie),
     takeLatest(SEARCH_INPUT_CHANGED, handleMovieSearch),
 
-    takeLatest(GO_TO_MOVIE_DETAILS, goToMovieDetails),
     takeLatest(GET_ALL_GENRES, getAllGenres),
 
     takeLatest(GET_COMMENTS_BY_MOVIE, commentsGet),
