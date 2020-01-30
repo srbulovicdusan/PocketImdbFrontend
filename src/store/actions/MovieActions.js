@@ -10,7 +10,7 @@ import {
   SET_SELECTED_MOVIE,
   SET_CURRENT_PAGE,
   SEARCH_INPUT_CHANGED,
-  GO_TO_MOVIE_DETAILS,
+  PUT_NEW_COMMENT,
   GET_COMMENTS_BY_MOVIE,
   PUT_COMMENTS, 
   POST_COMMENT,
@@ -89,9 +89,16 @@ export const putComments = (payload)=>{
     payload
   };
 }
+export const putNewComment = (payload)=>{
+  return {
+    type: PUT_NEW_COMMENT,
+    payload
+  }
+}
 export const postComment = (payload)=>{
   return {
     type: POST_COMMENT,
+    payload
   };
 }
 export const increaseMovieVisits = (payload) =>{

@@ -11,6 +11,7 @@ class AddComment extends React.Component{
         this.setState({text: event.target.value});
     }
     handleOnClick = ()=>{
+        console.log(this.state.text, this.props.movieId);
         this.props.postComment({text: this.state.text, movieId: this.props.movieId});
     }
     render() {

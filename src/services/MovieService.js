@@ -23,7 +23,7 @@ class MovieService extends ApiService {
   }
   searchMovie = searchParam =>{
     return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "/" + searchParam);
-
+  }
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
