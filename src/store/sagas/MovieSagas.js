@@ -1,9 +1,8 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
-
 import { movieService } from '../../services/MovieService';
 import {commentService} from '../../services/CommentService';
-import { setMovies, setMoviesCount, setMovie, putComments } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -23,14 +22,24 @@ export function* getMovieById({payload}){
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
-    yield put(setMovies(data));
+    yield put(setMovies(data.movies));
+    yield put(setCurrentPage(data.page));
+    yield put(setMoviesCount(data.perPage*data.totalPages));
+
 }
 export function* moviesGetCount(){
     const {data} = yield call(movieService.getMoviesCount);
     yield put(setMoviesCount(data));
 }
-export function* goToMovieDetails(action){
+export function* setSelectedMovie(action){
   yield put(setMovie(action.payload));
+}
+export function* handleMovieSearch(action){
+    yield delay(750);
+    if (action.payload !== ''){
+      const {data} = yield call(movieService.searchMovie, action.payload);
+      yield put(setMovies(data));
+    }
 }
 export function* commentsGet(action){
   const {data} = yield call(commentService.getAllByMovie, action.payload);
