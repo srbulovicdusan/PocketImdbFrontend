@@ -3,6 +3,8 @@ import ApiService from './ApiService';
 const ENDPOINTS = {
   MOVIES: '/api/movies',
   MOVIES_COUNT: '/api/count/movies',
+  SEARCH_MOVIES: '/api/search/movies',
+  MOVIES_VISITS: 'api/visits/movie'
 };
 
 class MovieService extends ApiService {
@@ -19,6 +21,12 @@ class MovieService extends ApiService {
   }
   getMoviesCount = () =>{
     return this.apiClient.get(ENDPOINTS.MOVIES_COUNT);
+  }
+  searchMovie = searchParam =>{
+    return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "/" + searchParam);
+  }
+  increaseMovieVisits = (payload) =>{
+    return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
 }
 export const movieService = new MovieService();

@@ -2,34 +2,57 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import Pagination from "material-ui-flat-pagination";
-import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import GenreFilter from '../component/GenreFilter';
+import Paper from '@material-ui/core/Paper';
 
 import MovieList from '../component/MovieList';
-import { getMovies, getMoviesByPage, getMoviesCount, getAllGenres } from '../store/actions/MovieActions';
-import GenreFilter from '../component/GenreFilter';
+
+import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres } from '../store/actions/MovieActions';
 
 
 class Home extends Component {
   state ={
     offset : 0,
+    searchInput: '',
   }
   componentDidMount() {
-    
-    this.props.getMoviesCount();
-    this.props.getMoviesByPage({page: 0, perPage:10});
+    this.props.getMoviesByPage({page: this.props.currentPage, perPage:10});
   }
   handleClick(offset) {
     this.setState({offset});
     this.props.getMoviesByPage({page: offset/10, perPage:10});
   }
-  
+  handleInputChange = (event) =>{
+    this.setState({searchInput: event.target.value});
+    this.props.searchInputChanged(event.target.value);
+    if (event.target.value === ''){
+      this.props.getMoviesByPage({page:this.props.currentPage, perPage:10})
+    }
+  }
   render() {
     return (
       
       <div style={classes.container}>
         <h1>Welcome to Pocket IMDb</h1>
         <h2>Movies</h2>
+      <TextField
+          onChange={this.handleInputChange}
+          style={{margin:'1%'}}
+          className={classes.margin}
+          id="input-with-icon-textfield"
+          label="Search"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
         <Grid container spacing={3}>
           <Grid item xs={2}>
             <GenreFilter/>
@@ -37,14 +60,18 @@ class Home extends Component {
           <Grid item xs={10}>
               <MovieList movies={this.props.movies}/>
           </Grid>
-        </Grid>
+        </Grid>        
+        
+        {this.state.searchInput === '' ?
         <Pagination
           style={classes.pagination}
           limit={10}
-          offset={this.state.offset}
+          offset={this.props.currentPage*10}
           total={this.props.count}
           onClick={(e, offset) => this.handleClick(offset)}
-        />
+        /> : null
+        }
+       
       </div>
     );
   }
@@ -62,15 +89,16 @@ const mapStateToProps = state => {
   return {
     movies: state.movie.all,
     count: state.movie.count,
-    selectedGenres: state.genre.selectedGenres
+    selectedGenres: state.genre.selectedGenres,
+    currentPage: state.movie.currentPage
   };
 };
 
 const mapDispatchToProps = {
   getMovies,
   getMoviesByPage,
-  getMoviesCount,
-  getAllGenres
+  getAllGenres,
+  searchInputChanged
 };
 
 export default withRouter(

@@ -9,20 +9,20 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 
-import {goToMovieDetails} from '../store/actions/MovieActions'
+import {setSelectedMovie} from '../store/actions/MovieActions'
 class MovieCard extends React.Component {
     cutDescriptionIfTooLarge = description =>{
       return description.length < 90 ?  description : description.slice(0, 90) + "...";
     }    
-    goToMovieDetails = () => {
-      this.props.goToMovieDetails(this.props.movie);
+    setSelectedMovie = () => {
+      this.props.setSelectedMovie(this.props.movie);
     }
   render(){
 
     return (
         <Card style={classes.card}>
           <Link style={{ color:'black', textDecoration: 'none'}}to={"/movie/" + this.props.movie.id}>
-          <CardActionArea onClick={this.goToMovieDetails}>
+          <CardActionArea onClick={this.setSelectedMovie}>
             <CardMedia
               style={classes.media}
               image={this.props.movie.image_url}
@@ -35,7 +35,13 @@ class MovieCard extends React.Component {
               </Typography>
               <Typography style={classes.description} variant="body2" color="textSecondary" component="p">
                 {this.cutDescriptionIfTooLarge(this.props.movie.description)}
+                <br/>
               </Typography>
+              <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
+                  {'views: ' + this.props.movie.num_of_visits}
+
+              </Typography>
+
             </CardContent>
           </CardActionArea>
           </Link >
@@ -52,21 +58,17 @@ class MovieCard extends React.Component {
     );
 }
 };
-// const classes = {
-//   card: {
-//     maxWidth: 500,
-//     minHeight : 'auto',
-//     maxHeight : 'auto'
-//   },
-//   media: {
-//     height: 140,
-//   }
-// };
+
 const classes = {
   card: {
     maxWidth: 345,
-    //maxHeight: 370,
     margin: "1%"
+  },
+  views:{
+    position: 'absolute',
+    bottom: 0,
+    left: '5%',
+    color: 'black',
   },
   title :{
     minHeight: 64,
@@ -82,6 +84,6 @@ const classes = {
   }
 };
 const mapDispatchToProps = {
-    goToMovieDetails
+    setSelectedMovie
 };
 export default connect(null, mapDispatchToProps)(MovieCard);
