@@ -2,7 +2,7 @@ import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
 import { movieService } from '../../services/MovieService';
 import {commentService} from '../../services/CommentService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment} from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putLoadMoreComments} from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -16,7 +16,7 @@ export function* moviesGet() {
 }
 export function* getMovieById({payload}){
   const {data} = yield call(movieService.getMovieById, payload.id);
-  const comments = yield call(commentService.getAllByMovie, payload);
+  const comments = yield call(commentService.getAllByMovie, {id:payload.id, page: 0, perPage:5});
   yield put(setMovie(data));
   yield put(putComments(comments.data));
 }
@@ -33,10 +33,9 @@ export function* moviesGetCount(){
 }
 export function* setSelectedMovie(action){
   yield put(setMovie(action.payload));
-  const comments = yield call(commentService.getAllByMovie, action.payload);
-  yield put(putComments(comments.data));
-
-
+  //uzmi prvih 5 komentara
+  const {data} = yield call(commentService.getAllByMovie, {id:action.payload.id, page: 0, perPage:5});
+  yield put(putComments(data));
 }
 export function* handleMovieSearch(action){
     yield delay(750);
@@ -46,8 +45,10 @@ export function* handleMovieSearch(action){
     }
 }
 export function* commentsGet(action){
-  const {data} = yield call(commentService.getAllByMovie, action.payload);
-  yield put(putComments(data));
+  console.log("asd");
+  const {data} = yield call(commentService.getAllByMovie, {id:action.payload.id, page: action.payload.page,perPage: action.payload.perPage});
+  console.log("comentari", data);
+  yield put(putLoadMoreComments(data));
 }
 export function* postComment(action){
   const {data} = yield call(commentService.postComment, action.payload);

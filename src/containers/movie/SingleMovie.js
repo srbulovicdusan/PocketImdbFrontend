@@ -16,9 +16,6 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
-
-        //this.props.getCommentsByMovie({id:this.props.match.params.id});
-
         this.props.increaseMovieVisits({id: this.props.match.params.id});
 
     }
@@ -47,6 +44,7 @@ class SingleMovie extends Component{
                                     <h2>Comments</h2>
                                     <Paper style={{paddingBottom:'15px'}}>
                                         <CommentList comments={this.props.movie.comments}/>
+                                        
                                         <AddComment movieId={this.props.movie.id}/>
                                     </Paper>
                                 </Grid>
