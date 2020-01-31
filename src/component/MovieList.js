@@ -1,7 +1,8 @@
 import React from 'react';
-import MovieCard from './MovieCard';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
+
+import MovieCard from './MovieCard';
 class MovieList extends React.Component{
     
     renderMovies = () => {
@@ -10,7 +11,6 @@ class MovieList extends React.Component{
         )
     }
     render() {
-        console.log("renderuje", this.props);
         return (
             <Grid style={{paddingLeft:'7%', paddingRight:'7%', width:'97%'}} justify="center" container spacing={4}>
                 {this.renderMovies()}
@@ -19,7 +19,6 @@ class MovieList extends React.Component{
     }
 }
 const mapStateToProps = state => {
-    console.log("Stejt", state)
     return {
       movies: state.movie.all
     };

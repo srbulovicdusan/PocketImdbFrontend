@@ -26,7 +26,6 @@ class AuthService extends ApiService {
   setAuthorizationHeader = () => {
     const token = this.getToken();
     if (token) {
-      console.log(token, "token")
       this.api.attachHeaders({
         Authorization: `Bearer ${token.access_token}`
       });

@@ -34,9 +34,9 @@ class SingleMovie extends Component{
         this.props.postMovieReaction({movie_id : this.props.movie.id, type: "DISLIKE"});
       }
     render(){   
-        console.log("rend", this.props.movie);
-        return this.props.movie?
-            (
+        
+            return this.props.movie && 
+            
                 <Grid style={classes.container} container spacing={3}>
                     <Grid style={classes.gtidItem} item xs={9}>
                         <Paper style={classes.movieDetail}>
@@ -73,8 +73,8 @@ class SingleMovie extends Component{
             <Paper style={{height:'500px', textAlign:'center', padding:'2%'}}><h4 style={{margin:'auto'}}>Related movies</h4></Paper>
                     </Grid>
                 </Grid>
-                ) 
-        : null
+            
+        
     }
 }
 const classes = {

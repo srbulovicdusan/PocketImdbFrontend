@@ -27,7 +27,6 @@ class MovieCard extends React.Component {
       return this.props.movie.reactions.filter(reaction =>{
           return reaction.type === 'LIKE';
       }).length;
-      //return likes.length;
     }
     countMovieDislikes = () => {
       let dislikes = this.props.movie.reactions.filter(reaction =>{
