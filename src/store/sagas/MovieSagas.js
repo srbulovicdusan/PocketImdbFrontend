@@ -45,9 +45,7 @@ export function* handleMovieSearch(action){
     }
 }
 export function* commentsGet(action){
-  console.log("asd");
   const {data} = yield call(commentService.getAllByMovie, {id:action.payload.id, page: action.payload.page,perPage: action.payload.perPage});
-  console.log("comentari", data);
   yield put(putLoadMoreComments(data));
 }
 export function* postComment(action){
@@ -56,6 +54,5 @@ export function* postComment(action){
 }
 export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
-  //asd
   yield put(setMovie(data));
 }
