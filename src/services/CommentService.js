@@ -10,7 +10,6 @@ class CommentService extends ApiService {
         this.setAuthorizationHeader();
       }
   getAllByMovie = (payload) =>{
-    console.log(payload)
     return this.apiClient.get(ENDPOINTS.COMMENTS + "/" + payload.id);
   }
   postComment = (payload) => {
