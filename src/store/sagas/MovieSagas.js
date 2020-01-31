@@ -23,7 +23,6 @@ export function* getMovieById({payload}){
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
-    console.log(data);
     yield put(setMovies(data.movies));
     yield put(setCurrentPage(data.page));
     yield put(setMoviesCount(data.perPage*data.totalPages));
@@ -34,7 +33,12 @@ export function* moviesGetCount(){
     yield put(setMoviesCount(data));
 }
 export function* setSelectedMovie(action){
+  
   yield put(setMovie(action.payload));
+  const comments = yield call(commentService.getAllByMovie, {id:action.payload.id});
+  yield put(putComments(comments.data));
+
+
 }
 export function* postMovieReaction(action){
     try{
@@ -43,10 +47,6 @@ export function* postMovieReaction(action){
     }catch{
 
     }
-  const comments = yield call(commentService.getAllByMovie, action.payload);
-  yield put(putComments(comments.data));
-
-
 }
 export function* handleMovieSearch(action){
     yield delay(750);
