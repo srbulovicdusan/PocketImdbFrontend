@@ -3,18 +3,29 @@ import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
+import AddComment from '../../component/AddComment';
+
+import CommentList from '../../component/CommentList';
+
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import IconButton from '@material-ui/core/IconButton';
-import { getMovieById, postMovieReaction } from '../../store/actions/MovieActions';
+import { getMovieById, postMovieReaction , getCommentsByMovie, increaseMovieVisits } from '../../store/actions/MovieActions';
+
+
 
 class SingleMovie extends Component{
     
     componentDidMount(){        
         //UKOLIKO NIJE PRONASAO U STORE-u SALJE REQUEST BACKENDU
-        if (this.props.movie == null){
+        if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
+
+        //this.props.getCommentsByMovie({id:this.props.match.params.id});
+
+        this.props.increaseMovieVisits({id: this.props.match.params.id});
+
     }
     countMovieLikes = () =>{
         return this.props.movie.reactions.filter(reaction =>{
@@ -50,6 +61,7 @@ class SingleMovie extends Component{
                                 <ThumbDownIcon fontSize="inherit" />
                             </IconButton>
                                 {this.countMovieDislikes()}
+                            <p>views: {this.props.movie.num_of_visits}</p>
                             <Grid container spacing={3}>
                                 <Grid style={classes.gtidItem} item xs={3}>
                                     <CardMedia
@@ -64,7 +76,11 @@ class SingleMovie extends Component{
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Paper><h2>comments</h2></Paper>
+                                    <h2>Comments</h2>
+                                    <Paper style={{paddingBottom:'15px'}}>
+                                        <CommentList comments={this.props.movie.comments}/>
+                                        <AddComment movieId={this.props.movie.id}/>
+                                    </Paper>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -102,6 +118,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
     getMovieById,
-    postMovieReaction
-  };
+    postMovieReaction,
+    increaseMovieVisits,
+    getCommentsByMovie
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)
