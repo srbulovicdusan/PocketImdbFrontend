@@ -18,7 +18,11 @@ import {
   PUT_GENRES,
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
-  INCREASE_MOVIE_VISITS} from './ActionTypes';
+  INCREASE_MOVIE_VISITS,
+  PUT_WATCHLIST,
+  PUT_NEW_WATCHLIST_ITEM,
+  POST_NEW_WATCHLIST_ITEM,
+  FETCH_USER_WATCHLIST} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -131,6 +135,30 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const putWatchlist = (payload) =>{
+  return {
+    type: PUT_WATCHLIST,
+    payload
+  }
+}
+export const putNewWatchlistItem = (payload) =>{
+  return {
+    type: PUT_NEW_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const postNewWatchlistItem = (payload) =>{
+  return {
+    type: POST_NEW_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const fetchUserWatchlist = (payload) =>{
+  return {
+    type: FETCH_USER_WATCHLIST,
     payload
   }
 }

@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 
 import MovieList from '../component/MovieList';
 
-import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres } from '../store/actions/MovieActions';
+import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres, fetchUserWatchlist } from '../store/actions/MovieActions';
 
 
 class Home extends Component {
@@ -21,6 +21,7 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
+    this.props.fetchUserWatchlist();
   }
   handleClick(offset) {
     this.setState({offset});
@@ -99,6 +100,7 @@ const mapDispatchToProps = {
   getMoviesByPage,
   getAllGenres,
   searchInputChanged,
+  fetchUserWatchlist
 };
 
 export default withRouter(

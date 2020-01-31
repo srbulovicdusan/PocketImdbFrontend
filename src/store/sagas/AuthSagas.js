@@ -3,14 +3,15 @@ import { push, go } from 'connected-react-router';
 
 import { authUser, loginError, registerError } from '../actions/AuthActions';
 import AuthService from '../../services/AuthService';
+import { putWatchlist } from '../actions/MovieActions';
 
 export function* userLogin({ payload }) {
   try {
-    yield call(AuthService.login, payload);
-
+    const data = yield call(AuthService.login, payload);
+    yield put(putWatchlist(data.watchlist));
     yield put(authUser(true));
-    yield put(push('/home'));
-    yield put(go());
+    //yield put(push('/home'));
+    //yield put(go());
   } catch (error) {
     yield put(loginError(true));
   }
