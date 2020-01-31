@@ -39,7 +39,6 @@ export function* setSelectedMovie(action){
 
 }
 export function* handleMovieSearch(action){
-    yield delay(750);
     if (action.payload !== ''){
       const {data} = yield call(movieService.searchMovie, action.payload);
       yield put(setMovies(data));

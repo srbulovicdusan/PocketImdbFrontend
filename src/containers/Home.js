@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import GenreFilter from '../component/GenreFilter';
 import Paper from '@material-ui/core/Paper';
-
+import debounce from 'lodash.debounce';
 import MovieList from '../component/MovieList';
 
 import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres } from '../store/actions/MovieActions';
@@ -19,6 +19,10 @@ class Home extends Component {
     offset : 0,
     searchInput: '',
   }
+  constructor(props){
+    super(props);
+    this.sendSearchinputs = debounce(this.sendSearchinputs, 750);
+  }
   componentDidMount() {
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
   }
@@ -26,9 +30,13 @@ class Home extends Component {
     this.setState({offset});
     this.props.getMoviesByPage({page: offset/10, perPage:10, genreFilter: this.props.selectedGenres});
   }
+  sendSearchinputs = (value) =>{
+    this.props.searchInputChanged(value);
+
+  }
   handleInputChange = (event) =>{
     this.setState({searchInput: event.target.value});
-    this.props.searchInputChanged(event.target.value);
+    this.sendSearchinputs(event.target.value);
     if (event.target.value === ''){
       this.props.getMoviesByPage({page:this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres})
     }
