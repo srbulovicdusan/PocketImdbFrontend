@@ -8,7 +8,7 @@ import Register from '../containers/auth/Register';
 import Home from '../containers/Home';
 import { authUser } from '../store/actions/AuthActions';
 import SingleMovie from '../containers/movie/SingleMovie';
-
+import AddMovie from '../containers/movie/AddMovie';
 class AppLayout extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
@@ -25,6 +25,7 @@ class AppLayout extends React.Component {
       <div>
         <Route exact path="/home" component={Home} />
         <Route exact path="/movie/:id" component={SingleMovie}/>
+        <Route exact path="/add/movie/" component={AddMovie}/>
       </div>
     ) : (
       <div>
