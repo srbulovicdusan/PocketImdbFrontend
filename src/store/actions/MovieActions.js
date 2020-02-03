@@ -22,7 +22,11 @@ import {
   PUT_WATCHLIST,
   PUT_NEW_WATCHLIST_ITEM,
   POST_NEW_WATCHLIST_ITEM,
-  FETCH_USER_WATCHLIST} from './ActionTypes';
+  FETCH_USER_WATCHLIST,
+  DELETE_WATCHLIST_ITEM,
+  REMOVE_WATCHLIST_ITEM,
+  EDIT_WATHCLIST_ITEM,
+  PUT_EDIT_WATCHLIST_ITEM} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -159,6 +163,30 @@ export const postNewWatchlistItem = (payload) =>{
 export const fetchUserWatchlist = (payload) =>{
   return {
     type: FETCH_USER_WATCHLIST,
+    payload
+  }
+}
+export const deleteWatchlistItem = (payload) =>{
+  return {
+    type: DELETE_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const removeWatchlistItem = (payload) =>{
+  return {
+    type: REMOVE_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const editWatchlistItem = (payload) =>{
+  return {
+    type: EDIT_WATHCLIST_ITEM,
+    payload
+  }
+}
+export const putEditWatchlistItem = payload =>{
+  return {
+    type: PUT_EDIT_WATCHLIST_ITEM,
     payload
   }
 }

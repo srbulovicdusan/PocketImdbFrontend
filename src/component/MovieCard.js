@@ -68,8 +68,8 @@ class MovieCard extends React.Component {
                 <br/>
               </Typography>
               <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
-                  {'views: ' + this.props.movie.num_of_visits} 
-                  <br/>        
+                  {'Views: ' + this.props.movie.num_of_visits} 
+                  <br></br>     
                   {this.markWatched()}
               </Typography>
             </CardContent>
@@ -94,6 +94,7 @@ const classes = {
     bottom: 0,
     left: '5%',
     color: 'black',
+    textAlign: 'left'
   },
   title :{
     minHeight: 64,

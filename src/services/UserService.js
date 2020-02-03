@@ -31,5 +31,12 @@ class UserService extends ApiService {
     addToWatchlist = (payload) =>{
         return this.apiClient.post(ENDPOINTS.WATCHLIST, payload);
     }
+    removeFromWatchlist = (payload) =>{
+      return this.apiClient.delete(ENDPOINTS.WATCHLIST + "/" + payload.id);
+    }
+    editWatchlistItem = (payload) =>{
+      console.log(payload)
+      return this.apiClient.put(ENDPOINTS.WATCHLIST, payload);
+    }
 }
 export const userService = new UserService();
