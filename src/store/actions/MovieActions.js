@@ -18,7 +18,9 @@ import {
   PUT_GENRES,
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
-  INCREASE_MOVIE_VISITS} from './ActionTypes';
+  INCREASE_MOVIE_VISITS,
+  FETCH_POPULAR_MOVIES,
+  PUT_POPULAR_MOVIES} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -131,6 +133,17 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const fetchPopularMovies = () =>{
+  return {
+    type: FETCH_POPULAR_MOVIES
+  }
+}
+export const putPopularMovies = (payload) =>{
+  return {
+    type: PUT_POPULAR_MOVIES,
     payload
   }
 }

@@ -4,7 +4,8 @@ const ENDPOINTS = {
   MOVIES: '/api/movies',
   MOVIES_COUNT: '/api/count/movies',
   SEARCH_MOVIES: '/api/search/movies',
-  MOVIES_VISITS: 'api/visits/movie'
+  MOVIES_VISITS: 'api/visits/movie',
+  POPULAR_MOVIES: 'api/popular/movies'
 };
 
 class MovieService extends ApiService {
@@ -16,7 +17,6 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
   }
   getMoviesByPage = payload => {
-    console.log(payload.genreFilter);
     let genresFilter = payload.genreFilter && payload.genreFilter.length >0 ? "&genreFilter=" + payload.genreFilter.join(',') : "";
     return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage + genresFilter);
   }
@@ -29,5 +29,9 @@ class MovieService extends ApiService {
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
+  getPopularMovies = () =>{
+    return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES);
+  }
+  
 }
 export const movieService = new MovieService();

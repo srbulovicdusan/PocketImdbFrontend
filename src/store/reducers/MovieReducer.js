@@ -1,7 +1,8 @@
-import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT, PUT_POPULAR_MOVIES } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
+  popularMovies: [],
   count : 0,
   currentPage: 0,
   selectedMovie:{
@@ -29,6 +30,9 @@ const movieReducer = (state = initialState, action) => {
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...action.payload]}}
     case PUT_NEW_COMMENT:
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, action.payload]}}
+    case PUT_POPULAR_MOVIES:
+      console.log(action.payload);
+      return {...state, popularMovies:[...action.payload]}
     default:
       return state;
   }
