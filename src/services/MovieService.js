@@ -29,5 +29,8 @@ class MovieService extends ApiService {
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
+  getRelatedMovies = (payload) =>{
+    return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related");
+  }
 }
 export const movieService = new MovieService();

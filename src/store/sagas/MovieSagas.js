@@ -2,7 +2,7 @@ import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
 import { movieService } from '../../services/MovieService';
 import {commentService} from '../../services/CommentService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment} from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putRelatedMovies} from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -57,4 +57,8 @@ export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
   //asd
   yield put(setMovie(data));
+}
+export function* getRelatedMovies({payload}){
+  const {data} = yield call(movieService.getRelatedMovies, payload);
+  yield put(putRelatedMovies(data));
 }

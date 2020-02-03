@@ -6,7 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import AddComment from '../../component/AddComment';
 import CommentList from '../../component/CommentList';
 
-import { getMovieById,getCommentsByMovie, increaseMovieVisits } from '../../store/actions/MovieActions';
+import { getMovieById,getCommentsByMovie, increaseMovieVisits, fetchRelatedMovies } from '../../store/actions/MovieActions';
+import MoviesListPaper from '../../component/MoviesListPaper';
 
 
 class SingleMovie extends Component{
@@ -16,9 +17,7 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
-
-        //this.props.getCommentsByMovie({id:this.props.match.params.id});
-
+        this.props.fetchRelatedMovies({id:this.props.match.params.id});
         this.props.increaseMovieVisits({id: this.props.match.params.id});
 
     }
@@ -54,7 +53,7 @@ class SingleMovie extends Component{
                         </Paper>
                     </Grid>
                     <Grid item xs={3}>
-            <Paper style={{height:'500px', textAlign:'center', padding:'2%'}}><h4 style={{margin:'auto'}}>Related movies</h4></Paper>
+                    <MoviesListPaper title={"Related movies"} movies={this.props.relatedMovies}></MoviesListPaper>
                     </Grid>
                 </Grid>
                 ) 
@@ -67,7 +66,8 @@ const classes = {
     },
     movieDetail: {
         height: 'auto',
-        padding: '2%'
+        padding: '2%',
+        marginTop: '2%',
     },
     media: {
         //objectFit: 'scale-down',
@@ -82,12 +82,14 @@ const classes = {
 
 }
 const mapStateToProps = (state) => {
-    return {movie: state.movie.selectedMovie}
+    return {movie: state.movie.selectedMovie,
+            relatedMovies: state.movie.relatedMovies}
 };
 const mapDispatchToProps = {
     getMovieById,
     increaseMovieVisits,
-    getCommentsByMovie
+    getCommentsByMovie,
+    fetchRelatedMovies
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)
