@@ -29,8 +29,8 @@ class MovieService extends ApiService {
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
-  getPopularMovies = () =>{
-    return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES);
+  getPopularMovies = (numOfMovies) =>{
+    return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);
   }
   
 }

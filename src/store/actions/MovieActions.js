@@ -136,9 +136,10 @@ export const deleteSelectedGenre = (payload) =>{
     payload
   }
 }
-export const fetchPopularMovies = () =>{
+export const fetchPopularMovies = (payload) =>{
   return {
-    type: FETCH_POPULAR_MOVIES
+    type: FETCH_POPULAR_MOVIES,
+    payload
   }
 }
 export const putPopularMovies = (payload) =>{

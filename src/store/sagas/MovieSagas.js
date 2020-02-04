@@ -57,7 +57,7 @@ export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
   yield put(setMovie(data));
 }
-export function* getPopularMovies(){
-  const {data} = yield call(movieService.getPopularMovies);
+export function* getPopularMovies({payload}){
+  const {data} = yield call(movieService.getPopularMovies, payload.numOfMovies);
   yield put(putPopularMovies(data));
 }

@@ -21,7 +21,7 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
-    this.props.fetchPopularMovies();
+    this.props.fetchPopularMovies({numOfMovies: 10});
   }
   handleClick(offset) {
     this.setState({offset});
