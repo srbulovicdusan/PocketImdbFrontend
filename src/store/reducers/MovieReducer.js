@@ -31,7 +31,6 @@ const movieReducer = (state = initialState, action) => {
     case PUT_NEW_COMMENT:
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, action.payload]}}
     case PUT_POPULAR_MOVIES:
-      console.log(action.payload);
       return {...state, popularMovies:[...action.payload]}
     default:
       return state;
