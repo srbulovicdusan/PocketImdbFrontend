@@ -23,6 +23,7 @@ export function* getMovieById({payload}){
 }
 export function* moviesGetByPage(action){
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
+    console.log(data);
     yield put(setMovies(data.movies));
     yield put(setCurrentPage(data.page));
     yield put(setMoviesCount(data.perPage*data.totalPages));
@@ -56,7 +57,6 @@ export function* postComment(action){
 }
 export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
-  //asd
   yield put(setMovie(data));
 }
 export function* createMovie({payload}){

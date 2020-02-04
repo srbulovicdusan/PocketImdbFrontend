@@ -28,10 +28,6 @@ class HttpService {
         this.unauthorizedCallback();
         break;
       }
-      case 422:{
-        return Promise.reject(error);
-        
-      }
       default:
         break;
     }

@@ -18,19 +18,7 @@ class AddMovie extends React.Component{
         this.props.getAllGenres();
     }
     handleChange(event, field){
-        switch(field){
-            case "TITLE":
-                this.setState({title: event.target.value})
-                break;
-            case "DESCRIPTION":
-                this.setState({description: event.target.value});
-                break;
-            case "IMAGE_URL":
-                this.setState({image_url: event.target.value})
-                break;
-            case "GENRE":
-                this.setState({genre_id: event.target.value})
-        }
+        this.setState({[field]: event.target.value});
     }
     handlePostMovie = ()=>{
         this.props.postMovie(this.state);
@@ -38,12 +26,12 @@ class AddMovie extends React.Component{
     render(){
         return (
         <React.Fragment>
-            <TextField  value={this.state.title} onChange={(event) => this.handleChange(event, "TITLE")} id="standard-basic" label="Title" />
+            <TextField  value={this.state.title} onChange={(event) => this.handleChange(event, "title")} id="standard-basic" label="Title" />
             <p style={{color:'red'}} >{this.props.errors.title && this.props.errors.title}</p>
-            <TextField  value={this.state.description} onChange={(event) => this.handleChange(event, "DESCRIPTION")} id="standard-basic" label="Description" />
+            <TextField  value={this.state.description} onChange={(event) => this.handleChange(event, "description")} id="standard-basic" label="Description" />
             <p style={{color:'red'}} >{this.props.errors.description && this.props.errors.description}</p>
             <br></br>
-            <TextField  value={this.state.image_url} onChange={(event) => this.handleChange(event, "IMAGE_URL")} id="standard-basic" label="Image url" />
+            <TextField  value={this.state.image_url} onChange={(event) => this.handleChange(event, "image_url")} id="standard-basic" label="Image url" />
             <p style={{color:'red'}} >{this.props.errors.image_url && this.props.errors.image_url}</p>
             <br></br>
             <InputLabel id="demo-simple-select-label">Genre</InputLabel>
@@ -51,7 +39,7 @@ class AddMovie extends React.Component{
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.genre_id}
-                onChange={(event) => this.handleChange(event, "GENRE")}
+                onChange={(event) => this.handleChange(event, "genre")}
             >
                 {this.props.genres && this.props.genres.map((genre, index)=>{
                     return (<MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)
