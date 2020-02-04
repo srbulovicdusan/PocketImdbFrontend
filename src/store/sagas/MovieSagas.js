@@ -59,6 +59,8 @@ export function* increaseMovieVisits(action){
   yield put(setMovie(data));
 }
 export function* getRelatedMovies({payload}){
+  console.log(payload);
   const {data} = yield call(movieService.getRelatedMovies, payload);
+  //console.log(data);
   yield put(putRelatedMovies(data));
 }

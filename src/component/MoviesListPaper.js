@@ -12,7 +12,7 @@ class MoviesListPaper extends React.Component{
     
     setSelectedMovie =(movie)=>{
         this.props.setSelectedMovie(movie);
-        this.props.fetchRelatedMovies({id : movie.id});
+        this.props.fetchRelatedMovies({id : movie.id, numOfMovies:10});
     }
     renderMovies = () =>{
         return this.props.movies.map(movie => {

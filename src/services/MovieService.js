@@ -16,7 +16,6 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
   }
   getMoviesByPage = payload => {
-    console.log(payload.genreFilter);
     let genresFilter = payload.genreFilter && payload.genreFilter.length >0 ? "&genreFilter=" + payload.genreFilter.join(',') : "";
     return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage + genresFilter);
   }
@@ -30,7 +29,7 @@ class MovieService extends ApiService {
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
   getRelatedMovies = (payload) =>{
-    return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related");
+    return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related?numOfMovies=" + payload.numOfMovies);
   }
 }
 export const movieService = new MovieService();

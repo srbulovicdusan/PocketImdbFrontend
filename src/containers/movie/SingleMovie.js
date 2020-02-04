@@ -17,7 +17,7 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
-        this.props.fetchRelatedMovies({id:this.props.match.params.id});
+        this.props.fetchRelatedMovies({id:this.props.match.params.id, numOfMovies:10});
         this.props.increaseMovieVisits({id: this.props.match.params.id});
 
     }
