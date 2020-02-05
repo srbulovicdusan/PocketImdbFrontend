@@ -39,7 +39,7 @@ class AddMovie extends React.Component{
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.genre_id}
-                onChange={(event) => this.handleChange(event, "genre")}
+                onChange={(event) => this.handleChange(event, "genre_id")}
             >
                 {this.props.genres && this.props.genres.map((genre, index)=>{
                     return (<MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)
