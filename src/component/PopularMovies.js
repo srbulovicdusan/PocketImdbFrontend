@@ -5,9 +5,11 @@ import {fetchPopularMovies} from '../store/actions/MovieActions';
 class PopularMovies extends React.Component{
     componentDidMount(){
         this.props.fetchPopularMovies({numOfMovies: 10});
+
     }
     render(){
-        return (<MoviesListPaper title={"Popular movies"} movies={this.props.popularMovies}></MoviesListPaper>)
+        
+        return (<div>{this.props.popularMovies && <MoviesListPaper title={"Popular movies"} movies={this.props.popularMovies}/>}</div>)
     }
 }
 const mapStateToProps = state =>{

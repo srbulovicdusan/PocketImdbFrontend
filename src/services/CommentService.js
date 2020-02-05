@@ -2,6 +2,7 @@ import ApiService from './ApiService';
 
 const ENDPOINTS = {
   COMMENTS: '/api/comments',
+
 };
 
 class CommentService extends ApiService {
@@ -10,7 +11,8 @@ class CommentService extends ApiService {
         this.setAuthorizationHeader();
       }
   getAllByMovie = (payload) =>{
-    return this.apiClient.get(ENDPOINTS.COMMENTS + "/" + payload.id);
+    console.log(payload);
+    return this.apiClient.get("api/movie" + "/" + payload.id + "/comments?page=" + payload.page + "&perPage=" + payload.perPage);
   }
   postComment = (payload) => {
       return this.apiClient.post(ENDPOINTS.COMMENTS, payload);

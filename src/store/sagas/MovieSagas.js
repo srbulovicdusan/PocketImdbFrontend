@@ -1,8 +1,14 @@
 import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
 import { movieService } from '../../services/MovieService';
+
 import {commentService} from '../../services/CommentService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment,putPopularMovies} from '../actions/MovieActions';
+
+
+
+
+import {userService} from '../../services/UserService';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -16,7 +22,7 @@ export function* moviesGet() {
 }
 export function* getMovieById({payload}){
   const {data} = yield call(movieService.getMovieById, payload.id);
-  const comments = yield call(commentService.getAllByMovie, payload);
+  const comments = yield call(commentService.getAllByMovie, {id:payload.id, page: 0, perPage:5});
   yield put(setMovie(data));
   yield put(putComments(comments.data));
 }
@@ -32,11 +38,19 @@ export function* moviesGetCount(){
     yield put(setMoviesCount(data));
 }
 export function* setSelectedMovie(action){
+  
   yield put(setMovie(action.payload));
-  const comments = yield call(commentService.getAllByMovie, action.payload);
-  yield put(putComments(comments.data));
+  //uzmi prvih 5 komentara
+  const {data} = yield call(commentService.getAllByMovie, {id:action.payload.id, page: 0, perPage:5});
+  yield put(putComments(data));
+}
+export function* postMovieReaction(action){
+    try{
+      const {data} = yield call(movieService.postMovieReaction, action.payload);
+      yield put(putMovieReaction(data));
+    }catch{
 
-
+    }
 }
 export function* handleMovieSearch(action){
     yield delay(750);
@@ -46,8 +60,8 @@ export function* handleMovieSearch(action){
     }
 }
 export function* commentsGet(action){
-  const {data} = yield call(commentService.getAllByMovie, action.payload);
-  yield put(putComments(data));
+  const {data} = yield call(commentService.getAllByMovie, {id:action.payload.id, page: action.payload.page,perPage: action.payload.perPage});
+  yield put(putLoadMoreComments(data));
 }
 export function* postComment(action){
   const {data} = yield call(commentService.postComment, action.payload);
@@ -59,5 +73,17 @@ export function* increaseMovieVisits(action){
 }
 export function* getPopularMovies({payload}){
   const {data} = yield call(movieService.getPopularMovies, payload.numOfMovies);
+  console.log(data, "asd");
   yield put(putPopularMovies(data));
 }
+export function* createMovie({payload}){
+  try{
+    const{data} = yield call(movieService.postMovie, payload);
+    yield put(push('/home'));
+    yield put(go());
+  }catch(error){
+    let errors = error.response.data.errors;
+    yield put(addMovieError({...errors}));
+  }
+}
+
