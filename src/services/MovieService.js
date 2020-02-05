@@ -7,7 +7,8 @@ const ENDPOINTS = {
   REACTIONS: '/api/reactions',
 
   SEARCH_MOVIES: '/api/search/movies',
-  MOVIES_VISITS: 'api/visits/movie'
+  MOVIES_VISITS: 'api/visits/movie',
+  WATCHLIST: 'api/watchlist',
 };
 
 class MovieService extends ApiService {
@@ -50,5 +51,7 @@ class MovieService extends ApiService {
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
+
+  
 }
 export const movieService = new MovieService();

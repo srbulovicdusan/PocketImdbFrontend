@@ -14,7 +14,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 
-import {setSelectedMovie, postMovieReaction} from '../store/actions/MovieActions'
+
+import {setSelectedMovie, postNewWatchlistItem, postMovieReaction} from '../store/actions/MovieActions'
 
 class MovieCard extends React.Component {
     
@@ -42,6 +43,25 @@ class MovieCard extends React.Component {
     handleDislike =() =>{
       this.props.postMovieReaction({movie_id : this.props.movie.id, type: "DISLIKE"});
     }
+    getWatchlistItemIfExists= () =>{
+      return this.props.watchlist && this.props.watchlist.find(watchItem=>watchItem.movie_id == this.props.movie.id);
+    }
+    isWatched = () =>{
+      return this.getWatchlistItemIfExists() && this.getWatchlistItemIfExists().watched;
+    }
+    addToWatchlist = () =>{
+      this.props.postNewWatchlistItem({movie_id: this.props.movie.id});
+    }
+    renderWatchlistButton(){
+      return this.getWatchlistItemIfExists() ? 
+        <Button size="small" variant="contained" color="primary" disabled>
+          Watch later
+        </Button>
+        :
+        <Button onClick={this.addToWatchlist}size="small" variant="contained" color="primary" >
+          Watch later
+        </Button>
+    }
   render(){
     return (        
         <Card style={classes.card}>
@@ -62,10 +82,10 @@ class MovieCard extends React.Component {
                 <br/>
               </Typography>
               <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
-                  {'views: ' + this.props.movie.num_of_visits}
-
+                  {'Views: ' + this.props.movie.num_of_visits} 
+                  <br></br>     
+                  {this.isWatched() ? 'You have watched this!' : null}
               </Typography>
-
             </CardContent>
           </CardActionArea>
           </Link >
@@ -73,13 +93,13 @@ class MovieCard extends React.Component {
           <CardActions>
             <IconButton onClick={this.handleLike} size="small">
               <ThumbUpIcon fontSize="inherit" />
-              
             </IconButton>
             {this.countMovieLikes()}
             <IconButton onClick={this.handleDislike}aria-label="delete"  size="small">
               <ThumbDownIcon fontSize="inherit" />
             </IconButton>
             {this.countMovieDislikes()}
+            {this.renderWatchlistButton()}
           </CardActions>
       </Card>
     );
@@ -96,6 +116,7 @@ const classes = {
     bottom: 0,
     left: '5%',
     color: 'black',
+    textAlign: 'left'
   },
   title :{
     minHeight: 64,
@@ -110,8 +131,12 @@ const classes = {
     height: 140,
   }
 };
+const mapStateToProps = state => {
+  return {watchlist : state.user.watchlist};
+}
 const mapDispatchToProps = {
     setSelectedMovie,
-    postMovieReaction
+    postMovieReaction,
+    postNewWatchlistItem,
 };
-export default connect(null, mapDispatchToProps)(MovieCard);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);
