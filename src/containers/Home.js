@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import MovieList from '../component/MovieList';
 import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres, fetchPopularMovies } from '../store/actions/MovieActions';
 import MoviesListPaper from '../component/MoviesListPaper';
+import PopularMovies from '../component/PopularMovies';
 
 
 class Home extends Component {
@@ -21,7 +22,6 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
-    this.props.fetchPopularMovies({numOfMovies: 10});
   }
   handleClick(offset) {
     this.setState({offset});
@@ -57,7 +57,7 @@ class Home extends Component {
         <Grid container spacing={3}>
           <Grid item xs={2}>
             <GenreFilter/>
-            <MoviesListPaper title={"Popular Movies"}movies={this.props.popularMovies}/>
+            <PopularMovies/>
           </Grid>
           <Grid item xs={10}>
               <MovieList movies={this.props.movies}/>
@@ -92,8 +92,7 @@ const mapStateToProps = state => {
     movies: state.movie.all,
     count: state.movie.count,
     selectedGenres: state.genre.selectedGenres,
-    currentPage: state.movie.currentPage,
-    popularMovies: state.movie.popularMovies
+    currentPage: state.movie.currentPage
   };
 };
 
@@ -101,8 +100,7 @@ const mapDispatchToProps = {
   getMovies,
   getMoviesByPage,
   getAllGenres,
-  searchInputChanged,
-  fetchPopularMovies
+  searchInputChanged
 };
 
 export default withRouter(
