@@ -8,6 +8,7 @@ import CommentList from '../../component/CommentList';
 
 import { getMovieById,getCommentsByMovie, increaseMovieVisits, fetchRelatedMovies } from '../../store/actions/MovieActions';
 import MoviesListPaper from '../../component/MoviesListPaper';
+import RelatedMovies from '../../component/RelatedMovies';
 
 
 class SingleMovie extends Component{
@@ -17,7 +18,6 @@ class SingleMovie extends Component{
         if (this.props.movie.id == ""){
             this.props.getMovieById({id:this.props.match.params.id});
         }
-        this.props.fetchRelatedMovies({id:this.props.match.params.id, numOfMovies:10});
         this.props.increaseMovieVisits({id: this.props.match.params.id});
 
     }
@@ -53,7 +53,7 @@ class SingleMovie extends Component{
                         </Paper>
                     </Grid>
                     <Grid item xs={3}>
-                    <MoviesListPaper title={"Related movies"} movies={this.props.relatedMovies}></MoviesListPaper>
+                    <RelatedMovies movieId={this.props.movie.id}/>
                     </Grid>
                 </Grid>
                 ) 
@@ -82,14 +82,14 @@ const classes = {
 
 }
 const mapStateToProps = (state) => {
-    return {movie: state.movie.selectedMovie,
-            relatedMovies: state.movie.relatedMovies}
+    return {
+        movie: state.movie.selectedMovie
+    }
 };
 const mapDispatchToProps = {
     getMovieById,
     increaseMovieVisits,
-    getCommentsByMovie,
-    fetchRelatedMovies
+    getCommentsByMovie
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)
