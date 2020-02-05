@@ -21,6 +21,7 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
+  PUT_LOAD_MORE_COMMENTS,
   POST_MOVIE_REACTION, 
   PUT_MOVIE_REACTION,
   PUT_WATCHLIST,
@@ -155,6 +156,12 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const putLoadMoreComments = (payload) =>{
+  return {
+    type: PUT_LOAD_MORE_COMMENTS,
     payload
   }
 }
