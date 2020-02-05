@@ -8,6 +8,10 @@ import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
 export function* getAllGenres(){
-    const {data} = yield call(genreService.getGenres);
-    yield put(putGenres(data));
+    try{
+        const {data} = yield call(genreService.getGenres);
+        yield put(putGenres(data));
+    }catch(error){
+
+    }
 }

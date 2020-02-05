@@ -9,6 +9,10 @@ import store from './store/Store';
 import './styles/css/bootstrap.min.css';
 
 export const history = createHistory();
+history.listen(() => {
+  const user = localStorage.getItem('user')
+  //!user && store.dispatch({type: 'AUTH_USER', payload: false})
+});
 
 class App extends Component {
   render() {

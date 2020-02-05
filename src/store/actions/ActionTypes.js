@@ -6,6 +6,9 @@ export const REGISTER = 'REGISTER';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 
+export const POST_MOVIE = 'POST_MOVIE';
+export const POST_MOVIE_OMDB = 'POST_MOVIE_OMDB';
+
 export const GET_MOVIES = 'GET_MOVIES';
 export const SET_MOVIES = 'SET_MOVIES';
 
@@ -36,3 +39,5 @@ export const PUT_GENRES = 'PUT_GENRES';
 export const PUT_SELECTED_GENRE = 'PUT_SELECTED_GENRE';
 export const DELETE_SELECTED_GENRE = 'DELETE_SELECTED_GENRE';
 
+export const SEARCH_MOVIE_OMDB = 'SEARCH_MOVIE_OMDB';
+export const PUT_SEARCH_RESULT = 'PUT_SEARCH_RESULT';

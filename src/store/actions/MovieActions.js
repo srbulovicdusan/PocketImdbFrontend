@@ -18,7 +18,11 @@ import {
   PUT_GENRES,
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
-  INCREASE_MOVIE_VISITS} from './ActionTypes';
+  INCREASE_MOVIE_VISITS,
+  POST_MOVIE,
+  SEARCH_MOVIE_OMDB,
+  PUT_SEARCH_RESULT,
+  POST_MOVIE_OMDB} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -131,6 +135,30 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const postMovie = (payload) =>{
+  return {
+    type: POST_MOVIE,
+    payload
+  }
+}
+export const searchMovieOmdb = (payload) =>{
+  return {
+    type: SEARCH_MOVIE_OMDB,
+    payload
+  }
+}
+export const putSearchResult = (payload) =>{
+  return {
+    type: PUT_SEARCH_RESULT,
+    payload
+  }
+}
+export const postMovieOmdb = payload =>{
+  return {
+    type: POST_MOVIE_OMDB,
     payload
   }
 }

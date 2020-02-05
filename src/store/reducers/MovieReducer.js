@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT, PUT_SEARCH_RESULT } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
@@ -12,6 +12,12 @@ const initialState = {
     reactions: [],
     comments: []
   },
+  searchResult: {
+    title:"",
+    description:"",
+    image_url:"",
+    genre: ""
+  }
 
 
 };
@@ -29,6 +35,8 @@ const movieReducer = (state = initialState, action) => {
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...action.payload]}}
     case PUT_NEW_COMMENT:
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, action.payload]}}
+    case PUT_SEARCH_RESULT:
+      return {...state, searchResult: {...action.payload}}
     default:
       return state;
   }

@@ -7,7 +7,7 @@ const ENDPOINTS = {
 class CommentService extends ApiService {
     constructor() {
         super();
-        this.setAuthorizationHeader();
+        //this.setAuthorizationHeader();
       }
   getAllByMovie = (payload) =>{
     return this.apiClient.get(ENDPOINTS.COMMENTS + "/" + payload.id);
