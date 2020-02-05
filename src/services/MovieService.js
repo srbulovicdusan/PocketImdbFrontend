@@ -8,6 +8,7 @@ const ENDPOINTS = {
 
   SEARCH_MOVIES: '/api/search/movies',
   MOVIES_VISITS: 'api/visits/movie',
+  POPULAR_MOVIES: 'api/popular/movies',
   WATCHLIST: 'api/watchlist',
 };
 
@@ -50,6 +51,9 @@ class MovieService extends ApiService {
   }
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
+  }
+  getPopularMovies = (numOfMovies) =>{
+    return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);
   }
   postMovie = (payload) =>{
     return this.apiClient.post(ENDPOINTS.MOVIES, payload);

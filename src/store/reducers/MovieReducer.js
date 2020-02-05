@@ -1,6 +1,6 @@
 
 import { bindActionCreators } from 'redux';
-import { SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION, PUT_LOAD_MORE_COMMENTS } from '../actions/ActionTypes';
+import { PUT_POPULAR_MOVIES,SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION ,PUT_LOAD_MORE_COMMENTS} from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
@@ -82,6 +82,8 @@ const movieReducer = (state = initialState, action) => {
         }
     case PUT_NEW_COMMENT:
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, action.payload], totalComments: state.selectedMovie.totalComments + 1}}
+    case PUT_POPULAR_MOVIES:
+      return {...state, popularMovies:[...action.payload]}
     default:
       return state;
   }

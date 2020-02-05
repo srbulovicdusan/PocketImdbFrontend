@@ -33,7 +33,9 @@ import {
   DELETE_WATCHLIST_ITEM,
   REMOVE_WATCHLIST_ITEM,
   EDIT_WATHCLIST_ITEM,
-  PUT_EDIT_WATCHLIST_ITEM} from './ActionTypes';
+  PUT_EDIT_WATCHLIST_ITEM,
+  FETCH_POPULAR_MOVIES,
+  PUT_POPULAR_MOVIES} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -158,6 +160,18 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const fetchPopularMovies = (payload) =>{
+  return {
+    type: FETCH_POPULAR_MOVIES,
+    payload
+  }
+}
+export const putPopularMovies = (payload) =>{
+  return {
+    type: PUT_POPULAR_MOVIES,
     payload
   }
 }

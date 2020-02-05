@@ -6,8 +6,9 @@ import {commentService} from '../../services/CommentService';
 
 
 
+
 import {userService} from '../../services/UserService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -69,6 +70,11 @@ export function* postComment(action){
 export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
   yield put(setMovie(data));
+}
+export function* getPopularMovies({payload}){
+  const {data} = yield call(movieService.getPopularMovies, payload.numOfMovies);
+  console.log(data, "asd");
+  yield put(putPopularMovies(data));
 }
 export function* createMovie({payload}){
   try{

@@ -1,6 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
 
+
 import { 
   LOGIN, 
   REGISTER, 
@@ -21,7 +22,8 @@ import {
   FETCH_USER_WATCHLIST, 
   DELETE_WATCHLIST_ITEM, 
   EDIT_WATHCLIST_ITEM, 
-  POST_MOVIE  } from '../actions/ActionTypes';
+  POST_MOVIE,
+  FETCH_POPULAR_MOVIES  } from '../actions/ActionTypes';
 import { userLogin, userRegister } from './AuthSagas';
 import { moviesGet, 
   moviesGetByPage , 
@@ -33,7 +35,8 @@ import { moviesGet,
   postComment, 
   increaseMovieVisits , 
   postMovieReaction, 
-  createMovie} from './MovieSagas';
+  createMovie,
+  getPopularMovies} from './MovieSagas';
 import { getAllGenres, addSelectedGenre, removeSelectedGenre } from './GenreSagas';
 import {addToWatchList, getWatchlistForUser, deleteWatchListItem, editWatchlistItem} from './UserSagas';
 export default function* rootSaga() {
@@ -52,6 +55,7 @@ export default function* rootSaga() {
     takeLatest(GET_COMMENTS_BY_MOVIE, commentsGet),
     takeLatest(POST_COMMENT, postComment),
     takeLatest(INCREASE_MOVIE_VISITS, increaseMovieVisits),
+    takeLatest(FETCH_POPULAR_MOVIES, getPopularMovies),
     takeLatest(POST_MOVIE, createMovie),
     takeLatest(POST_NEW_WATCHLIST_ITEM, addToWatchList),
     takeLatest(FETCH_USER_WATCHLIST, getWatchlistForUser),
