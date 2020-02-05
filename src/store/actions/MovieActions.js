@@ -1,3 +1,5 @@
+
+
 import { 
 
   GET_MOVIES,
@@ -19,6 +21,8 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
+  POST_MOVIE_REACTION, 
+  PUT_MOVIE_REACTION,
   PUT_WATCHLIST,
   PUT_NEW_WATCHLIST_ITEM,
   POST_NEW_WATCHLIST_ITEM,
@@ -72,6 +76,18 @@ export const setMoviesCount = (payload) =>{
 export const setSelectedMovie = (payload) =>{
   return {
     type: SET_SELECTED_MOVIE,
+    payload
+  };
+}
+export const postMovieReaction = (payload) =>{
+  return {
+    type: POST_MOVIE_REACTION,
+    payload
+  };
+}
+export const putMovieReaction = (payload) =>{
+  return {
+    type: PUT_MOVIE_REACTION,
     payload
   };
 }

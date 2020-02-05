@@ -1,9 +1,11 @@
 import { call, put, delay } from 'redux-saga/effects';
 import { push, go, navigate } from 'connected-react-router';
 import { movieService } from '../../services/MovieService';
+
 import {commentService} from '../../services/CommentService';
+
 import {userService} from '../../services/UserService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment} from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -33,11 +35,20 @@ export function* moviesGetCount(){
     yield put(setMoviesCount(data));
 }
 export function* setSelectedMovie(action){
+  
   yield put(setMovie(action.payload));
-  const comments = yield call(commentService.getAllByMovie, action.payload);
+  const comments = yield call(commentService.getAllByMovie, {id:action.payload.id});
   yield put(putComments(comments.data));
 
 
+}
+export function* postMovieReaction(action){
+    try{
+      const {data} = yield call(movieService.postMovieReaction, action.payload);
+      yield put(putMovieReaction(data));
+    }catch{
+
+    }
 }
 export function* handleMovieSearch(action){
     yield delay(750);

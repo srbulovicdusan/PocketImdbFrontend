@@ -4,9 +4,14 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import AddComment from '../../component/AddComment';
+
 import CommentList from '../../component/CommentList';
 
-import { getMovieById,getCommentsByMovie, increaseMovieVisits } from '../../store/actions/MovieActions';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import IconButton from '@material-ui/core/IconButton';
+import { getMovieById, postMovieReaction , getCommentsByMovie, increaseMovieVisits } from '../../store/actions/MovieActions';
+
 
 
 class SingleMovie extends Component{
@@ -22,13 +27,40 @@ class SingleMovie extends Component{
         this.props.increaseMovieVisits({id: this.props.match.params.id});
 
     }
+    countMovieLikes = () =>{
+        return this.props.movie.reactions.filter(reaction =>{
+            return reaction.type === 'LIKE';
+        }).length;
+      }
+      countMovieDislikes = () => {
+        let dislikes = this.props.movie.reactions.filter(reaction =>{
+            return reaction.type === 'DISLIKE';
+        });
+        return dislikes.length;
+      }
+      handleLike = () =>{
+        this.props.postMovieReaction({movie_id : this.props.movie.id, type: "LIKE"});
+      }
+      handleDislike =() =>{
+        this.props.postMovieReaction({movie_id : this.props.movie.id, type: "DISLIKE"});
+      }
     render(){   
-        return this.props.movie?
-            (
+        
+            return this.props.movie && 
+            
                 <Grid style={classes.container} container spacing={3}>
                     <Grid style={classes.gtidItem} item xs={9}>
                         <Paper style={classes.movieDetail}>
                             <h1>{this.props.movie.title}</h1>
+                            <IconButton onClick={this.handleLike} size="small">
+                                <ThumbUpIcon fontSize="inherit" />
+                                
+                            </IconButton>
+                                {this.countMovieLikes()}
+                            <IconButton onClick={this.handleDislike}aria-label="delete"  size="small">
+                                <ThumbDownIcon fontSize="inherit" />
+                            </IconButton>
+                                {this.countMovieDislikes()}
                             <p>views: {this.props.movie.num_of_visits}</p>
                             <Grid container spacing={3}>
                                 <Grid style={classes.gtidItem} item xs={3}>
@@ -57,8 +89,8 @@ class SingleMovie extends Component{
             <Paper style={{height:'500px', textAlign:'center', padding:'2%'}}><h4 style={{margin:'auto'}}>Related movies</h4></Paper>
                     </Grid>
                 </Grid>
-                ) 
-        : null
+            
+        
     }
 }
 const classes = {
@@ -86,6 +118,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
     getMovieById,
+    postMovieReaction,
     increaseMovieVisits,
     getCommentsByMovie
 };

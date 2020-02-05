@@ -1,9 +1,10 @@
 import React from 'react';
-import MovieCard from './MovieCard';
 import Grid from '@material-ui/core/Grid';
+import {connect} from 'react-redux';
 
+import MovieCard from './MovieCard';
 class MovieList extends React.Component{
-
+    
     renderMovies = () => {
         return this.props.movies.map((movie, index) => 
              <Grid item key={movie.id} xs={index < 6 ? 4 : 3}><MovieCard movie={movie}/></Grid>
@@ -17,4 +18,9 @@ class MovieList extends React.Component{
         );
     }
 }
-export default MovieList;
+const mapStateToProps = state => {
+    return {
+      movies: state.movie.all
+    };
+  };
+export default connect(mapStateToProps)(MovieList);

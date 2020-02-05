@@ -41,6 +41,7 @@ class Home extends Component {
       <div style={classes.container}>
         <h1>Welcome to Pocket IMDb</h1>
         <h2>Movies</h2>
+
       <TextField
           onChange={this.handleInputChange}
           style={{margin:'1%'}}
@@ -94,10 +95,12 @@ const classes = {
 }
 const mapStateToProps = state => {
   return {
+
     movies: state.movie.all,
     count: state.movie.count,
     selectedGenres: state.genre.selectedGenres,
     currentPage: state.movie.currentPage
+
   };
 };
 

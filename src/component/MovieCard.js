@@ -14,7 +14,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 
-import {setSelectedMovie, postNewWatchlistItem} from '../store/actions/MovieActions'
+
+import {setSelectedMovie, postNewWatchlistItem, postMovieReaction} from '../store/actions/MovieActions'
 
 class MovieCard extends React.Component {
     
@@ -23,6 +24,24 @@ class MovieCard extends React.Component {
     }    
     setSelectedMovie = () => {
       this.props.setSelectedMovie(this.props.movie);
+    }
+    countMovieLikes = () =>{
+      console.log("osvezio props", this.props);
+      return this.props.movie.reactions.filter(reaction =>{
+          return reaction.type === 'LIKE';
+      }).length;
+    }
+    countMovieDislikes = () => {
+      let dislikes = this.props.movie.reactions.filter(reaction =>{
+          return reaction.type === 'DISLIKE';
+      });
+      return dislikes.length;
+    }
+    handleLike = () =>{
+      this.props.postMovieReaction({movie_id : this.props.movie.id, type: "LIKE"});
+    }
+    handleDislike =() =>{
+      this.props.postMovieReaction({movie_id : this.props.movie.id, type: "DISLIKE"});
     }
     getWatchlistItemIfExists= () =>{
       return this.props.watchlist && this.props.watchlist.find(watchItem=>watchItem.movie_id == this.props.movie.id);
@@ -72,7 +91,15 @@ class MovieCard extends React.Component {
           </Link >
 
           <CardActions>
-              {this.renderWatchlistButton()}
+            <IconButton onClick={this.handleLike} size="small">
+              <ThumbUpIcon fontSize="inherit" />
+            </IconButton>
+            {this.countMovieLikes()}
+            <IconButton onClick={this.handleDislike}aria-label="delete"  size="small">
+              <ThumbDownIcon fontSize="inherit" />
+            </IconButton>
+            {this.countMovieDislikes()}
+            {this.renderWatchlistButton()}
           </CardActions>
       </Card>
     );
@@ -109,6 +136,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
     setSelectedMovie,
-    postNewWatchlistItem
+    postMovieReaction,
+    postNewWatchlistItem,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);
