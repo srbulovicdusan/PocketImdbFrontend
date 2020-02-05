@@ -4,10 +4,18 @@ import MoviesListPaper from '../component/MoviesListPaper';
 import {fetchRelatedMovies} from '../store/actions/MovieActions';
 class RelatedMovies extends React.Component{
     componentDidMount(){
-        this.props.fetchRelatedMovies({id:this.props.movieId, numOfMovies:10});
+        
+        if (this.props.movieId){
+            this.props.fetchRelatedMovies({id:this.props.movieId, numOfMovies:10});
+        }
+    }
+    componentDidUpdate(prevProps){
+        if (this.props.movieId !== prevProps.movieId){
+            this.props.fetchRelatedMovies({id:this.props.movieId, numOfMovies:10});
+        }
     }
     render(){
-        return <MoviesListPaper title="Related movies" movies={this.props.relatedMovies}/>
+    return (<div>{this.props.relatedMovies && <MoviesListPaper title="Related movies" movies={this.props.relatedMovies}/>}</div>)
     }
 }
 const mapStateToProps = (state) => {
