@@ -21,6 +21,8 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
+  POST_MOVIE,
+  ADD_MOVIE_ERROR,
   PUT_LOAD_MORE_COMMENTS,
   POST_MOVIE_REACTION, 
   PUT_MOVIE_REACTION,
@@ -156,6 +158,18 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const postMovie = (payload) =>{
+  return {
+    type: POST_MOVIE,
+    payload
+  }
+}
+export const addMovieError = (payload) =>{
+  return {
+    type: ADD_MOVIE_ERROR,
     payload
   }
 }

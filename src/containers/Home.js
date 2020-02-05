@@ -64,6 +64,11 @@ class Home extends Component {
               Watchlist
             </Button>
             </Link>
+            <Link to={"/add/movie"}>
+              <Button style={{marginTop:'5%'}}size="small" variant="contained" color="primary">
+                Add movie
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={10}>
               <MovieList movies={this.props.movies}/>

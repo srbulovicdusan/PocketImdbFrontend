@@ -26,7 +26,6 @@ class MovieCard extends React.Component {
       this.props.setSelectedMovie(this.props.movie);
     }
     countMovieLikes = () =>{
-      console.log("osvezio props", this.props);
       return this.props.movie.reactions.filter(reaction =>{
           return reaction.type === 'LIKE';
       }).length;
