@@ -15,7 +15,9 @@ class AddMovie extends React.Component{
         genre_id: '',
     }
     componentDidMount(){
-        this.props.getAllGenres();
+        if (this.props.genres.length == 0){
+            this.props.getAllGenres();
+        }
     }
     handleChange(event, field){
         this.setState({[field]: event.target.value});
@@ -26,9 +28,9 @@ class AddMovie extends React.Component{
     render(){
         return (
         <React.Fragment>
-            <TextField  value={this.state.title} onChange={(event) => this.handleChange(event, "title")} id="standard-basic" label="Title" />
+            <TextField  value={this.state.title} onChange={(event) => this.handleChange(event, "title")} id="standard-basiccc" label="Title" />
             <p style={{color:'red'}} >{this.props.errors.title && this.props.errors.title}</p>
-            <TextField  value={this.state.description} onChange={(event) => this.handleChange(event, "description")} id="standard-basic" label="Description" />
+            <TextField  value={this.state.description} onChange={(event) => this.handleChange(event, "description")} id="standard-basicc" label="Description" />
             <p style={{color:'red'}} >{this.props.errors.description && this.props.errors.description}</p>
             <br></br>
             <TextField  value={this.state.image_url} onChange={(event) => this.handleChange(event, "image_url")} id="standard-basic" label="Image url" />

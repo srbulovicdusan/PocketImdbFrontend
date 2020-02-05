@@ -11,7 +11,8 @@ import Paper from '@material-ui/core/Paper';
 
 import MovieList from '../component/MovieList';
 
-import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres } from '../store/actions/MovieActions';
+import { getMovies, getMoviesByPage, searchInputChanged,  getAllGenres, fetchUserWatchlist } from '../store/actions/MovieActions';
+import { Button } from '@material-ui/core';
 
 
 class Home extends Component {
@@ -21,6 +22,7 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.getMoviesByPage({page: this.props.currentPage, perPage:10, genreFilter: this.props.selectedGenres});
+    this.props.fetchUserWatchlist();
   }
   handleClick(offset) {
     this.setState({offset});
@@ -39,6 +41,7 @@ class Home extends Component {
       <div style={classes.container}>
         <h1>Welcome to Pocket IMDb</h1>
         <h2>Movies</h2>
+
       <TextField
           onChange={this.handleInputChange}
           style={{margin:'1%'}}
@@ -56,6 +59,16 @@ class Home extends Component {
         <Grid container spacing={3}>
           <Grid item xs={2}>
             <GenreFilter/>
+              <Link style={{ marginTop:'3%', color:'black', textDecoration: 'none'}}to={"/watchlist"}>
+            <Button style={{marginTop:'5%'}}size="small" variant="contained" color="primary">
+              Watchlist
+            </Button>
+            </Link>
+            <Link to={"/add/movie"}>
+              <Button style={{marginTop:'5%'}}size="small" variant="contained" color="primary">
+                Add movie
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={10}>
               <MovieList movies={this.props.movies}/>
@@ -87,10 +100,12 @@ const classes = {
 }
 const mapStateToProps = state => {
   return {
+
     movies: state.movie.all,
     count: state.movie.count,
     selectedGenres: state.genre.selectedGenres,
     currentPage: state.movie.currentPage
+
   };
 };
 
@@ -99,6 +114,7 @@ const mapDispatchToProps = {
   getMoviesByPage,
   getAllGenres,
   searchInputChanged,
+  fetchUserWatchlist
 };
 
 export default withRouter(
