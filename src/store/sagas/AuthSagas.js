@@ -10,8 +10,8 @@ export function* userLogin({ payload }) {
     const data = yield call(AuthService.login, payload);
     yield put(putWatchlist(data.watchlist));
     yield put(authUser(true));
-    //yield put(push('/home'));
-    //yield put(go());
+    yield put(push('/home'));
+    yield put(go());
   } catch (error) {
     yield put(loginError(true));
   }

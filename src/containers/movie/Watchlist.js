@@ -19,7 +19,6 @@ class Watchlist extends React.Component{
         this.props.editWatchlistItem({...watchItem, watched: !watchItem.watched});
     }
      render(){
-        console.log(this.props.watchlist)
         return (<div style={{margin:'3%'}}>
             {this.props.watchlist.map(watchItem =>{
                 return (<div key={watchItem.id}>

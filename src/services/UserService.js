@@ -35,7 +35,6 @@ class UserService extends ApiService {
       return this.apiClient.delete(ENDPOINTS.WATCHLIST + "/" + payload.id);
     }
     editWatchlistItem = (payload) =>{
-      console.log(payload)
       return this.apiClient.put(ENDPOINTS.WATCHLIST, payload);
     }
 }

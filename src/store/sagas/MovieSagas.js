@@ -56,7 +56,6 @@ export function* postComment(action){
 }
 export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
-  //asd
   yield put(setMovie(data));
 }
 

@@ -25,15 +25,10 @@ class MovieCard extends React.Component {
       this.props.setSelectedMovie(this.props.movie);
     }
     getWatchlistItemIfExists= () =>{
-      return this.props.watchlist && this.props.watchlist.filter(watchItem=>
-        {
-          if (watchItem.movie_id == this.props.movie.id){
-            return watchItem;
-          }
-        })[0];
+      return this.props.watchlist && this.props.watchlist.find(watchItem=>watchItem.movie_id == this.props.movie.id);
     }
-    markWatched = () =>{
-      return this.getWatchlistItemIfExists() && this.getWatchlistItemIfExists().watched == true ? 'You have watched this!' : null
+    isWatched = () =>{
+      return this.getWatchlistItemIfExists() && this.getWatchlistItemIfExists().watched;
     }
     addToWatchlist = () =>{
       this.props.postNewWatchlistItem({movie_id: this.props.movie.id});
@@ -70,7 +65,7 @@ class MovieCard extends React.Component {
               <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
                   {'Views: ' + this.props.movie.num_of_visits} 
                   <br></br>     
-                  {this.markWatched()}
+                  {this.isWatched() ? 'You have watched this!' : null}
               </Typography>
             </CardContent>
           </CardActionArea>
