@@ -22,6 +22,7 @@ class MovieService extends ApiService {
   };
 
   getMovieById = id =>{
+    
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
   }
   getMoviesByPage = payload => {
@@ -51,6 +52,9 @@ class MovieService extends ApiService {
   }
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
+  }
+  getRelatedMovies = (payload) =>{
+    return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related?numOfMovies=" + payload.numOfMovies);
   }
   getPopularMovies = (numOfMovies) =>{
     return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);

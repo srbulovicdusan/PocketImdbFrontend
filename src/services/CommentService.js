@@ -8,26 +8,13 @@ const ENDPOINTS = {
 class CommentService extends ApiService {
     constructor() {
         super();
-        this.setAuthorizationHeader();
       }
+
   getAllByMovie = (payload) =>{
-    console.log(payload);
     return this.apiClient.get("api/movie" + "/" + payload.id + "/comments?page=" + payload.page + "&perPage=" + payload.perPage);
   }
   postComment = (payload) => {
       return this.apiClient.post(ENDPOINTS.COMMENTS, payload);
   }
-  setAuthorizationHeader = () => {
-    const token = this.getToken();
-    if (token) {
-      this.api.attachHeaders({
-        Authorization: `Bearer ${token}`
-      });
-    }
-  };
-  getToken = () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).access_token : undefined;
-  };
 }
 export const commentService = new CommentService();

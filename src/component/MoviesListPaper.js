@@ -16,13 +16,15 @@ class MoviesListPaper extends React.Component{
         <Paper style={{marginLeft:'20px', marginTop:'5%'}}>
             {this.props.title}
             <br/>
+
             {this.props.movies.map(movie => {
                 return (
                     <div key={movie.id} style={{textAlign:'lefgt'}}>
                         <Link 
                             onClick={()=>this.setSelectedMovie(movie)} 
                             style={{width:'100%', textAlign:'left', marginLeft:'5%'}}  
-                            to={"/movie/" + movie.id}> {movie.title}
+                            to={"/movie/" + movie.id}> 
+                            {movie.title}
                         </Link>
                         <br></br>
                     </div>)
@@ -31,4 +33,7 @@ class MoviesListPaper extends React.Component{
         );
     }
 }
-export default MoviesListPaper;
+const mapDispatchToProps = {
+    setSelectedMovie
+}
+export default connect(null, mapDispatchToProps)(MoviesListPaper);

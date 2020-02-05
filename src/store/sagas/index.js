@@ -23,7 +23,8 @@ import {
   DELETE_WATCHLIST_ITEM, 
   EDIT_WATHCLIST_ITEM, 
   POST_MOVIE,
-  FETCH_POPULAR_MOVIES  } from '../actions/ActionTypes';
+  FETCH_POPULAR_MOVIES,
+  FETCH_RELATED_MOVIES   } from '../actions/ActionTypes';
 import { userLogin, userRegister } from './AuthSagas';
 import { moviesGet, 
   moviesGetByPage , 
@@ -36,7 +37,8 @@ import { moviesGet,
   increaseMovieVisits , 
   postMovieReaction, 
   createMovie,
-  getPopularMovies} from './MovieSagas';
+  getPopularMovies,
+  getRelatedMovies} from './MovieSagas';
 import { getAllGenres, addSelectedGenre, removeSelectedGenre } from './GenreSagas';
 import {addToWatchList, getWatchlistForUser, deleteWatchListItem, editWatchlistItem} from './UserSagas';
 export default function* rootSaga() {
@@ -55,6 +57,7 @@ export default function* rootSaga() {
     takeLatest(GET_COMMENTS_BY_MOVIE, commentsGet),
     takeLatest(POST_COMMENT, postComment),
     takeLatest(INCREASE_MOVIE_VISITS, increaseMovieVisits),
+    takeLatest(FETCH_RELATED_MOVIES, getRelatedMovies),
     takeLatest(FETCH_POPULAR_MOVIES, getPopularMovies),
     takeLatest(POST_MOVIE, createMovie),
     takeLatest(POST_NEW_WATCHLIST_ITEM, addToWatchList),

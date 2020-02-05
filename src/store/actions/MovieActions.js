@@ -21,6 +21,8 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
+  FETCH_RELATED_MOVIES,
+  PUT_RELATED_MOVIES,
   POST_MOVIE,
   ADD_MOVIE_ERROR,
   PUT_LOAD_MORE_COMMENTS,
@@ -35,7 +37,8 @@ import {
   EDIT_WATHCLIST_ITEM,
   PUT_EDIT_WATCHLIST_ITEM,
   FETCH_POPULAR_MOVIES,
-  PUT_POPULAR_MOVIES} from './ActionTypes';
+  PUT_POPULAR_MOVIES,
+  PUT_INCREASE_VISITS} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -60,6 +63,12 @@ export const setMovies = payload => {
     payload
   };
 };
+export const putVisit = payload =>{
+  return {
+    type: PUT_INCREASE_VISITS,
+    payload
+  };
+}
 
 export const setMovie = payload => {
   return {
@@ -160,6 +169,18 @@ export const putSelectedGenre = (payload) =>{
 export const deleteSelectedGenre = (payload) =>{
   return {
     type: DELETE_SELECTED_GENRE,
+    payload
+  }
+}
+export const fetchRelatedMovies = (payload) =>{
+  return {
+    type: FETCH_RELATED_MOVIES,
+    payload
+  }
+}
+export const putRelatedMovies = (payload) =>{
+  return {
+    type: PUT_RELATED_MOVIES,
     payload
   }
 }

@@ -74,14 +74,13 @@ class MovieCard extends React.Component {
             <CardContent>
               <Typography style={classes.title} gutterBottom variant="h5" component="h2">
                 {this.props.movie.title}
-                {this.props.movie.genre_id}
               </Typography>
               <Typography style={classes.description} variant="body2" color="textSecondary" component="p">
                 {this.cutDescriptionIfTooLarge(this.props.movie.description)}
                 <br/>
               </Typography>
               <Typography style={classes.views} variant="body2" color="textSecondary" component="p">
-                  {'Views: ' + this.props.movie.num_of_visits} 
+                  {'Views: ' + this.props.movie.num_of_visits}
                   <br></br>     
                   {this.isWatched() ? 'You have watched this!' : null}
               </Typography>

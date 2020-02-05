@@ -7,8 +7,9 @@ import {commentService} from '../../services/CommentService';
 
 
 
+
 import {userService} from '../../services/UserService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies, putRelatedMovies, putVisit } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
 
 
@@ -65,15 +66,19 @@ export function* commentsGet(action){
 }
 export function* postComment(action){
   const {data} = yield call(commentService.postComment, action.payload);
+  
   yield put(putNewComment(data));
 }
 export function* increaseMovieVisits(action){
   const {data} = yield call(movieService.increaseMovieVisits, action.payload);
-  yield put(setMovie(data));
+  yield put(putVisit(data));
+}
+export function* getRelatedMovies({payload}){
+  const {data} = yield call(movieService.getRelatedMovies, payload);
+  yield put(putRelatedMovies(data));
 }
 export function* getPopularMovies({payload}){
   const {data} = yield call(movieService.getPopularMovies, payload.numOfMovies);
-  console.log(data, "asd");
   yield put(putPopularMovies(data));
 }
 export function* createMovie({payload}){

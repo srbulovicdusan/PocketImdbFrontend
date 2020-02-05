@@ -14,10 +14,10 @@ class CommentList extends React.Component{
         return (
             <div>
             <Grid style={{paddingLeft:'7%', paddingRight:'7%', width:'97%'}} justify="center" container spacing={4}>
-                {this.props.comments.map((comment, index) => 
+                {this.props.selectedMovie.comments && this.props.selectedMovie.comments.map((comment, index) => 
                 <Grid item key={comment.id} xs={12}><Comment comment={comment}/></Grid>)}
             </Grid>
-            {this.props.selectedMovie.comments.length < this.props.selectedMovie.totalComments &&
+            {this.props.selectedMovie.comments && this.props.selectedMovie.comments.length < this.props.selectedMovie.totalComments &&
                 <Button style={{marginLeft:'40%'}}onClick={this.handleMoreComments} variant="contained" color="primary">
                         Load More
                 </Button>

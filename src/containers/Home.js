@@ -67,6 +67,7 @@ class Home extends Component {
               Watchlist
             </Button>
             </Link>
+            <br></br>
             <Link to={"/add/movie"}>
               <Button style={{marginTop:'5%'}}size="small" variant="contained" color="primary">
                 Add movie
