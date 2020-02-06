@@ -40,7 +40,7 @@ class MovieService extends ApiService {
   }
   postMovieOmdb = (payload) =>{
     //this.setAuthorizationHeader()
-    return this.apiClient.post(ENDPOINTS.MOVIES_OMDB, payload);
+    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
   }
   setAuthorizationHeader = () => {
     const token = this.getToken();
