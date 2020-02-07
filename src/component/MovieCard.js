@@ -62,13 +62,14 @@ class MovieCard extends React.Component {
         </Button>
     }
   render(){
-    return (        
+    return (   
+           
         <Card style={classes.card}>
           <Link style={{ color:'black', textDecoration: 'none'}}to={"/movie/" + this.props.movie.id}>
           <CardActionArea onClick={this.setSelectedMovie}>
             <CardMedia
               style={classes.media}
-              image={this.props.movie.image_url}
+              image={this.props.movie.image.thumbnail}
               title={this.props.movie.title}
             />
             <CardContent>

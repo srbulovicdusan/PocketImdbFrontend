@@ -12,7 +12,7 @@ const initialState = {
     id: "",
     title:"",
     description:"",
-    image_url:"",
+    image:{},
     reactions: [],
     comments: [],
     currentPage: 0,

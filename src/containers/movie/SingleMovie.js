@@ -57,7 +57,7 @@ class SingleMovie extends Component{
                                 
                             </IconButton>
                                 {this.countMovieLikes(this.props.movie)}
-                            <IconButton onClick={() => {console.log('pozivam se '); this.handleDislike()}} aria-label="delete"  size="small">
+                            <IconButton onClick={() => {this.handleDislike()}} aria-label="delete"  size="small">
                                 <ThumbDownIcon fontSize="inherit" />
                             </IconButton>
                                 {this.countMovieDislikes(this.props.movie)}
@@ -66,7 +66,7 @@ class SingleMovie extends Component{
                                 <Grid style={classes.gtidItem} item xs={3}>
                                     <CardMedia
                                     style={classes.media}
-                                    image='https://i.ytimg.com/vi/us4bSYZSQlk/maxresdefault.jpg'
+                                    image={this.props.movie.image.fullSize}
                                     title="Paella dish"
                                     />
                                 </Grid>
@@ -106,6 +106,7 @@ const classes = {
     media: {
         //objectFit: 'scale-down',
         height: '200px',
+        width: 'auto',
         border: '1px solid #ddd',
         borderRadius: '4px',
         padding: '5px',
