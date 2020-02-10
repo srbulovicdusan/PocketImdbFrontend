@@ -43,13 +43,7 @@ class MovieService extends ApiService {
       });
     }
   };
-  setHeader = () =>{
-    this.api.attachHeaders({
-      "content-type": "multipart/form-data",
-      "Accept": "application/json",
-      //"type" : "formData"
-    });
-  }
+  
   getToken = () => {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user).access_token : undefined;
@@ -67,7 +61,6 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);
   }
   postMovie = (payload) =>{
-    this.setHeader();
     let formData = new FormData();
     formData.append('image', payload.image);
     formData.append('title', payload.title);

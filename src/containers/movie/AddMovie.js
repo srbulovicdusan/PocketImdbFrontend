@@ -23,9 +23,7 @@ class AddMovie extends React.Component{
     handleChange(event, field){
         this.setState({[field]: event.target.value});
     }
-    handleChangeImage(file){
-        console.log("usao")
-        
+    handleChangeImage = (file)=>{        
         this.setState({image: file.target.files[0]});
     }
     handlePostMovie = ()=>{
@@ -39,7 +37,7 @@ class AddMovie extends React.Component{
             <TextField  value={this.state.description} onChange={(event) => this.handleChange(event, "description")} id="standard-basicc" label="Description" />
             <p style={{color:'red'}} >{this.props.errors.description && this.props.errors.description}</p>
             <br></br>
-            <input type="file" onChange={this.handleChangeImage.bind(this)}></input>
+            <input type="file" onChange={this.handleChangeImage}></input>
             <p style={{color:'red'}} >{this.props.errors.image_url && this.props.errors.image_url}</p>
             <br></br>
             <InputLabel id="demo-simple-select-label">Genre</InputLabel>
