@@ -48,7 +48,7 @@ class MovieService extends ApiService {
     return user ? JSON.parse(user).access_token : undefined;
   };
   searchMovie = searchParam =>{
-    return this.apiClient.post(ENDPOINTS.SEARCH_MOVIES, {searchParam:searchParam});
+    return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "?queryParam=" + searchParam);
   }
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
