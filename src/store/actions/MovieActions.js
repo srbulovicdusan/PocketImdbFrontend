@@ -1,3 +1,5 @@
+
+
 import { 
 
   GET_MOVIES,
@@ -19,10 +21,27 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
-  POST_MOVIE,
   SEARCH_MOVIE_OMDB,
   PUT_SEARCH_RESULT,
-  POST_MOVIE_OMDB} from './ActionTypes';
+  POST_MOVIE_OMDB,
+  FETCH_RELATED_MOVIES,
+  PUT_RELATED_MOVIES,
+  POST_MOVIE,
+  ADD_MOVIE_ERROR,
+  PUT_LOAD_MORE_COMMENTS,
+  POST_MOVIE_REACTION, 
+  PUT_MOVIE_REACTION,
+  PUT_WATCHLIST,
+  PUT_NEW_WATCHLIST_ITEM,
+  POST_NEW_WATCHLIST_ITEM,
+  FETCH_USER_WATCHLIST,
+  DELETE_WATCHLIST_ITEM,
+  REMOVE_WATCHLIST_ITEM,
+  EDIT_WATHCLIST_ITEM,
+  PUT_EDIT_WATCHLIST_ITEM,
+  FETCH_POPULAR_MOVIES,
+  PUT_POPULAR_MOVIES,
+  PUT_INCREASE_VISITS} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -47,6 +66,12 @@ export const setMovies = payload => {
     payload
   };
 };
+export const putVisit = payload =>{
+  return {
+    type: PUT_INCREASE_VISITS,
+    payload
+  };
+}
 
 export const setMovie = payload => {
   return {
@@ -68,6 +93,18 @@ export const setMoviesCount = (payload) =>{
 export const setSelectedMovie = (payload) =>{
   return {
     type: SET_SELECTED_MOVIE,
+    payload
+  };
+}
+export const postMovieReaction = (payload) =>{
+  return {
+    type: POST_MOVIE_REACTION,
+    payload
+  };
+}
+export const putMovieReaction = (payload) =>{
+  return {
+    type: PUT_MOVIE_REACTION,
     payload
   };
 }
@@ -138,6 +175,30 @@ export const deleteSelectedGenre = (payload) =>{
     payload
   }
 }
+export const fetchRelatedMovies = (payload) =>{
+  return {
+    type: FETCH_RELATED_MOVIES,
+    payload
+  }
+}
+export const putRelatedMovies = (payload) =>{
+  return {
+    type: PUT_RELATED_MOVIES,
+    payload
+  }
+}
+export const fetchPopularMovies = (payload) =>{
+  return {
+    type: FETCH_POPULAR_MOVIES,
+    payload
+  }
+}
+export const putPopularMovies = (payload) =>{
+  return {
+    type: PUT_POPULAR_MOVIES,
+    payload
+  }
+}
 export const postMovie = (payload) =>{
   return {
     type: POST_MOVIE,
@@ -159,6 +220,66 @@ export const putSearchResult = (payload) =>{
 export const postMovieOmdb = payload =>{
   return {
     type: POST_MOVIE_OMDB,
+    payload
+  }
+}
+export const addMovieError = (payload) =>{
+  return {
+    type: ADD_MOVIE_ERROR,
+    payload
+  }
+}
+export const putLoadMoreComments = (payload) =>{
+  return {
+    type: PUT_LOAD_MORE_COMMENTS,
+    payload
+  }
+}
+export const putWatchlist = (payload) =>{
+  return {
+    type: PUT_WATCHLIST,
+    payload
+  }
+}
+export const putNewWatchlistItem = (payload) =>{
+  return {
+    type: PUT_NEW_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const postNewWatchlistItem = (payload) =>{
+  return {
+    type: POST_NEW_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const fetchUserWatchlist = (payload) =>{
+  return {
+    type: FETCH_USER_WATCHLIST,
+    payload
+  }
+}
+export const deleteWatchlistItem = (payload) =>{
+  return {
+    type: DELETE_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const removeWatchlistItem = (payload) =>{
+  return {
+    type: REMOVE_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const editWatchlistItem = (payload) =>{
+  return {
+    type: EDIT_WATHCLIST_ITEM,
+    payload
+  }
+}
+export const putEditWatchlistItem = payload =>{
+  return {
+    type: PUT_EDIT_WATCHLIST_ITEM,
     payload
   }
 }

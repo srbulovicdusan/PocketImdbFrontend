@@ -5,12 +5,17 @@ const ENDPOINTS = {
   MOVIES_OMDB: '/api/omdb/movies',
 
   MOVIES_COUNT: '/api/count/movies',
+
+  REACTIONS: '/api/reactions',
+
   SEARCH_MOVIES: '/api/search/movies',
-  MOVIES_VISITS: 'api/visits/movie'
+  MOVIES_VISITS: 'api/visits/movie',
+  POPULAR_MOVIES: 'api/popular/movies',
+  WATCHLIST: 'api/watchlist',
 };
 
 class MovieService extends ApiService {
-  constructor(){
+  constructor() {
     super();
     this.setAuthorizationHeader();
   }
@@ -19,16 +24,31 @@ class MovieService extends ApiService {
   };
 
   getMovieById = id =>{
+    
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + id);
   }
   getMoviesByPage = payload => {
-    console.log(payload.genreFilter);
     let genresFilter = payload.genreFilter && payload.genreFilter.length >0 ? "&genreFilter=" + payload.genreFilter.join(',') : "";
     return this.apiClient.get(ENDPOINTS.MOVIES + "?page=" + payload.page +"&perPage=" + payload.perPage + genresFilter);
   }
   getMoviesCount = () =>{
     return this.apiClient.get(ENDPOINTS.MOVIES_COUNT);
   }
+  postMovieReaction = (payload) =>{
+    return this.apiClient.post(ENDPOINTS.REACTIONS, payload);
+  }
+  setAuthorizationHeader = () => {
+    const token = this.getToken();
+    if (token) {
+      this.api.attachHeaders({
+        Authorization: `Bearer ${token}`
+      });
+    }
+  };
+  getToken = () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).access_token : undefined;
+  };
   searchMovie = searchParam =>{
     return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "/" + searchParam);
   }
@@ -39,7 +59,6 @@ class MovieService extends ApiService {
     return this.apiClient.post(ENDPOINTS.MOVIES, payload);
   }
   postMovieOmdb = (payload) =>{
-    //this.setAuthorizationHeader()
     return this.apiClient.post(ENDPOINTS.MOVIES, payload);
   }
   setAuthorizationHeader = () => {
@@ -55,5 +74,16 @@ class MovieService extends ApiService {
     user && console.log(JSON.parse(user).access_token);
     return user ? JSON.parse(user).access_token : undefined;
   };
+  getRelatedMovies = (payload) =>{
+    return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related?numOfMovies=" + payload.numOfMovies);
+  }
+  getPopularMovies = (numOfMovies) =>{
+    return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);
+  }
+  postMovie = (payload) =>{
+    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+  }
+
+  
 }
 export const movieService = new MovieService();
