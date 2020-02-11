@@ -21,6 +21,9 @@ import {
   PUT_SELECTED_GENRE,
   DELETE_SELECTED_GENRE,
   INCREASE_MOVIE_VISITS,
+  SEARCH_MOVIE_OMDB,
+  PUT_SEARCH_RESULT,
+  POST_MOVIE_OMDB,
   FETCH_RELATED_MOVIES,
   PUT_RELATED_MOVIES,
   POST_MOVIE,
@@ -38,7 +41,8 @@ import {
   PUT_EDIT_WATCHLIST_ITEM,
   FETCH_POPULAR_MOVIES,
   PUT_POPULAR_MOVIES,
-  PUT_INCREASE_VISITS} from './ActionTypes';
+  PUT_INCREASE_VISITS,
+  PUT_USER_REACTIONS} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -202,6 +206,24 @@ export const postMovie = (payload) =>{
     payload
   }
 }
+export const searchMovieOmdb = (payload) =>{
+  return {
+    type: SEARCH_MOVIE_OMDB,
+    payload
+  }
+}
+export const putSearchResult = (payload) =>{
+  return {
+    type: PUT_SEARCH_RESULT,
+    payload
+  }
+}
+export const postMovieOmdb = payload =>{
+  return {
+    type: POST_MOVIE_OMDB,
+    payload
+  }
+}
 export const addMovieError = (payload) =>{
   return {
     type: ADD_MOVIE_ERROR,
@@ -259,6 +281,12 @@ export const editWatchlistItem = (payload) =>{
 export const putEditWatchlistItem = payload =>{
   return {
     type: PUT_EDIT_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const putUserReactions = payload =>{
+  return {
+    type: PUT_USER_REACTIONS,
     payload
   }
 }

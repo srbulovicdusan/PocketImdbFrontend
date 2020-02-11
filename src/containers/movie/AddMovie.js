@@ -13,7 +13,7 @@ class AddMovie extends React.Component{
         title : "",
         description: "",
         image: '',
-        genre_id: '',
+        genre: '',
     }
     componentDidMount(){
         if (this.props.genres.length == 0){
@@ -44,11 +44,11 @@ class AddMovie extends React.Component{
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={this.state.genre_id}
-                onChange={(event) => this.handleChange(event, "genre_id")}
+                value={this.state.genre}
+                onChange={(event) => this.handleChange(event, "genre")}
             >
                 {this.props.genres && this.props.genres.map((genre, index)=>{
-                    return (<MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)
+                    return (<MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)
                 })}
                 
             </Select>

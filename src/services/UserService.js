@@ -26,6 +26,7 @@ class UserService extends ApiService {
         return user ? JSON.parse(user).access_token : undefined;
     };
     getWatchList = () =>{
+        this.setAuthorizationHeader();
         return this.apiClient.get(ENDPOINTS.WATCHLIST);
     }
     addToWatchlist = (payload) =>{

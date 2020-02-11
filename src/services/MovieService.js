@@ -2,6 +2,8 @@ import ApiService from './ApiService';
 
 const ENDPOINTS = {
   MOVIES: '/api/movies',
+  MOVIES_OMDB: '/api/omdb/movies',
+
   MOVIES_COUNT: '/api/count/movies',
 
   REACTIONS: '/api/reactions',
@@ -49,11 +51,30 @@ class MovieService extends ApiService {
     return user ? JSON.parse(user).access_token : undefined;
   };
   searchMovie = searchParam =>{
-    return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "/" + searchParam);
+    return this.apiClient.get(ENDPOINTS.SEARCH_MOVIES + "?queryParam=" + searchParam);
   }
   increaseMovieVisits = (payload) =>{
     return this.apiClient.put(ENDPOINTS.MOVIES_VISITS + "/" + payload.id);
   }
+  postMovie = (payload) =>{
+    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+  }
+  postMovieOmdb = (payload) =>{
+    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+  }
+  setAuthorizationHeader = () => {
+    const token = this.getToken();
+    if (token) {
+      this.api.attachHeaders({
+        Authorization: `Bearer ${token}`
+      });
+    }
+  };
+  
+  getToken = () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).access_token : undefined;
+  };
   getRelatedMovies = (payload) =>{
     return this.apiClient.get(ENDPOINTS.MOVIES + "/" + payload.id + "/related?numOfMovies=" + payload.numOfMovies);
   }
@@ -64,7 +85,7 @@ class MovieService extends ApiService {
     let formData = new FormData();
     formData.append('image', payload.image);
     formData.append('title', payload.title);
-    formData.append('genre_id', payload.genre_id);
+    formData.append('genre', payload.genre);
     formData.append('description', payload.description);
     return this.apiClient.post(ENDPOINTS.MOVIES, formData);
   }

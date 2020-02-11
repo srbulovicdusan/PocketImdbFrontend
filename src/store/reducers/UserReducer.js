@@ -1,7 +1,8 @@
-import { PUT_WATCHLIST, PUT_NEW_WATCHLIST_ITEM ,REMOVE_WATCHLIST_ITEM, PUT_EDIT_WATCHLIST_ITEM} from '../actions/ActionTypes';
+import { PUT_WATCHLIST, PUT_NEW_WATCHLIST_ITEM ,REMOVE_WATCHLIST_ITEM, PUT_EDIT_WATCHLIST_ITEM, PUT_USER_REACTIONS} from '../actions/ActionTypes';
 
 const initialState = {
-  watchlist: []
+  watchlist: [],
+  reactions: []
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,7 +16,9 @@ const userReducer = (state = initialState, action) => {
     case PUT_EDIT_WATCHLIST_ITEM:
         let itemIdx = state.watchlist.findIndex(elem => elem.id === action.payload.id);
         return {...state, watchlist:[...state.watchlist.slice(0, itemIdx), action.payload ,...state.watchlist.slice(itemIdx+1)]}
-    default:
+    case PUT_USER_REACTIONS:
+      return {...state, reactions: [...action.payload]}
+        default:
       return state;
   }
 };

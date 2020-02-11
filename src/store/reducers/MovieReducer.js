@@ -1,7 +1,5 @@
-
-
 import { bindActionCreators } from 'redux';
-import { PUT_POPULAR_MOVIES,SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION ,PUT_LOAD_MORE_COMMENTS, PUT_RELATED_MOVIES, PUT_INCREASE_VISITS} from '../actions/ActionTypes';
+import { PUT_POPULAR_MOVIES,SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION ,PUT_LOAD_MORE_COMMENTS, PUT_RELATED_MOVIES, PUT_INCREASE_VISITS, PUT_SEARCH_RESULT, PUT_USER_REACTIONS } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
@@ -20,6 +18,12 @@ const initialState = {
     perPage:0,
     num_of_visits:0
   },
+  searchResult: {
+    title:"",
+    description:"",
+    image_url:"",
+    genre: ""
+  }
 
 
 };
@@ -86,6 +90,8 @@ const movieReducer = (state = initialState, action) => {
         }
     case PUT_NEW_COMMENT:
       return {...state, selectedMovie: {...state.selectedMovie, comments: [...state.selectedMovie.comments, action.payload]}}
+    case PUT_SEARCH_RESULT:
+      return {...state, searchResult: {...action.payload}}
     case PUT_RELATED_MOVIES:
       return {...state, relatedMovies:[...action.payload]}
     case PUT_POPULAR_MOVIES:

@@ -3,15 +3,10 @@ import { push, go, navigate } from 'connected-react-router';
 import { movieService } from '../../services/MovieService';
 
 import {commentService} from '../../services/CommentService';
-
-
-
-
-
+import {omdbService} from '../../services/OmdbService';
 import {userService} from '../../services/UserService';
-import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies, putRelatedMovies, putVisit } from '../actions/MovieActions';
+import { setMovies, setMoviesCount, setMovie, putComments, setCurrentPage, putNewComment, putMovieReaction, putLoadMoreComments, addMovieError,putPopularMovies, putRelatedMovies, putVisit, putSearchResult } from '../actions/MovieActions';
 import { GET_MOVIES_BY_PAGE } from '../actions/ActionTypes';
-
 
 export function* moviesGet() {
   try {
@@ -28,11 +23,14 @@ export function* getMovieById({payload}){
   yield put(putComments(comments.data));
 }
 export function* moviesGetByPage(action){
+  try{
     const {data} = yield call(movieService.getMoviesByPage, action.payload)
     yield put(setMovies(data.movies));
     yield put(setCurrentPage(data.page));
     yield put(setMoviesCount(data.perPage*data.totalPages));
-
+    }catch(error){
+      console.log(error)
+  }
 }
 export function* moviesGetCount(){
     const {data} = yield call(movieService.getMoviesCount);
@@ -87,8 +85,29 @@ export function* createMovie({payload}){
     yield put(push('/home'));
     yield put(go());
   }catch(error){
-    let errors = error.response.data.errors;
-    yield put(addMovieError({...errors}));
+    //let errors = error.response.data.errors;
+    //yield put(addMovieError({...errors}));
   }
 }
+export function* searchMovieOMDB({payload}){
+  try{
+    const {data} = yield call(omdbService.findMovie, payload);
+    yield put(putSearchResult({title: data.Title, description: data.Plot, image_url: data.Poster, genre: data.Genre.split(',')[0]}));
+  }catch(error){
+    console.log(error);
+  }
+}
+export function* postMovieOmdb({payload}){
+  try{
+    const{data} = yield call(movieService.postMovieOmdb, payload);
+    yield put(push('/home'));
+    yield put(go());
+  }catch(error){
+    
+  }
+}
+
+    
+
+
 
