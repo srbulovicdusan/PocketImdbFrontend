@@ -73,6 +73,11 @@ class Home extends Component {
                 Add movie
               </Button>
             </Link>
+            <Link to={"/add/movieomdb"}>
+              <Button style={{marginTop:'5%'}}size="small" variant="contained" color="primary">
+                Add movie OMDB
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={10}>
               <MovieList movies={this.props.movies}/>
@@ -95,7 +100,8 @@ class Home extends Component {
 }
 const classes = {
   container: {
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '97%'
   },
   pagination:{
     margin: 'auto',

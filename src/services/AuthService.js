@@ -42,7 +42,6 @@ class AuthService extends ApiService {
   destroySession = () => {
     localStorage.clear();
     this.api.removeHeaders(['Authorization']);
-    //history.navigate('/login');
   };
 
   login = async loginData => {

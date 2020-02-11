@@ -41,7 +41,8 @@ import {
   PUT_EDIT_WATCHLIST_ITEM,
   FETCH_POPULAR_MOVIES,
   PUT_POPULAR_MOVIES,
-  PUT_INCREASE_VISITS} from './ActionTypes';
+  PUT_INCREASE_VISITS,
+  PUT_USER_REACTIONS} from './ActionTypes';
 export const getMoviesByPage = payload =>{
   return {
     type: GET_MOVIES_BY_PAGE,
@@ -280,6 +281,12 @@ export const editWatchlistItem = (payload) =>{
 export const putEditWatchlistItem = payload =>{
   return {
     type: PUT_EDIT_WATCHLIST_ITEM,
+    payload
+  }
+}
+export const putUserReactions = payload =>{
+  return {
+    type: PUT_USER_REACTIONS,
     payload
   }
 }

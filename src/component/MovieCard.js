@@ -62,13 +62,13 @@ class MovieCard extends React.Component {
         </Button>
     }
   render(){
-    return (        
+    return (
         <Card style={classes.card}>
           <Link style={{ color:'black', textDecoration: 'none'}}to={"/movie/" + this.props.movie.id}>
           <CardActionArea onClick={this.setSelectedMovie}>
             <CardMedia
               style={classes.media}
-              image={this.props.movie.image_url}
+              image={this.props.movie.image.thumbnail}
               title={this.props.movie.title}
             />
             <CardContent>
@@ -89,7 +89,7 @@ class MovieCard extends React.Component {
           </Link >
 
           <CardActions>
-            <IconButton onClick={this.handleLike} size="small">
+            <IconButton onClick={this.handleLike} size="small" >
               <ThumbUpIcon fontSize="inherit" />
             </IconButton>
             {this.countMovieLikes()}
@@ -130,7 +130,8 @@ const classes = {
   }
 };
 const mapStateToProps = state => {
-  return {watchlist : state.user.watchlist};
+  return {watchlist : state.user.watchlist,
+          reactions : state.user.reactions};
 }
 const mapDispatchToProps = {
     setSelectedMovie,

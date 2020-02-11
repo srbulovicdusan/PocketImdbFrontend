@@ -1,5 +1,5 @@
 import { bindActionCreators } from 'redux';
-import { PUT_POPULAR_MOVIES,SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION ,PUT_LOAD_MORE_COMMENTS, PUT_RELATED_MOVIES, PUT_INCREASE_VISITS, PUT_SEARCH_RESULT } from '../actions/ActionTypes';
+import { PUT_POPULAR_MOVIES,SET_MOVIES, SET_MOVIES_COUNT, SET_MOVIE, PUT_COMMENTS, SET_CURRENT_PAGE, PUT_NEW_COMMENT,PUT_MOVIE_REACTION ,PUT_LOAD_MORE_COMMENTS, PUT_RELATED_MOVIES, PUT_INCREASE_VISITS, PUT_SEARCH_RESULT, PUT_USER_REACTIONS } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
@@ -10,7 +10,7 @@ const initialState = {
     id: "",
     title:"",
     description:"",
-    image_url:"",
+    image:{},
     reactions: [],
     comments: [],
     currentPage: 0,

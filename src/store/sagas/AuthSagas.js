@@ -3,15 +3,16 @@ import { push, go } from 'connected-react-router';
 
 import { authUser, loginError, registerError } from '../actions/AuthActions';
 import AuthService from '../../services/AuthService';
-import { putWatchlist } from '../actions/MovieActions';
+import { putWatchlist, putUserReactions } from '../actions/MovieActions';
 
 export function* userLogin({ payload }) {
   try {
     const data = yield call(AuthService.login, payload);
     yield put(putWatchlist(data.watchlist));
+    yield put(putUserReactions(data.reactions));
     yield put(authUser(true));
     yield put(push('/home'));
-    yield put(go());
+    
   } catch (error) {
     yield put(loginError(true));
   }

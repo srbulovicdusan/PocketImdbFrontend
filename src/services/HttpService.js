@@ -10,8 +10,7 @@ class HttpService {
 
   }
   requestHandler = (request) => {
-        
-    //this.setAuthorizationHeader();
+    
   
   return request
 }
@@ -39,18 +38,19 @@ class HttpService {
     }
     return Promise.reject(error);
   }
-  // setAuthorizationHeader = () => {
-  //   const token = this.getToken();
-  //   if (token) {
-  //     this.attachHeaders({
-  //       Authorization: `Bearer ${token.access_token}`
-  //     });
-  //   }
-  // };
-  // getToken = () => {
-  //   const user = localStorage.getItem('user');
-  //   return user ? JSON.parse(user).access_token : undefined;
-  // };
+  setAuthorizationHeader = () => {
+    const token = this.getToken();
+    if (token) {
+      console.log(token);
+      this.attachHeaders({
+        Authorization: `Bearer ${token.access_token}`
+      });
+    }
+  };
+  getToken = () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).access_token : undefined;
+  };
   setUnauthorizedCallback(callback) {
     this.unauthorizedCallback = callback;
   }

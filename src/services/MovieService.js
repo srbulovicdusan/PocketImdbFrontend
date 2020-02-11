@@ -45,6 +45,7 @@ class MovieService extends ApiService {
       });
     }
   };
+  
   getToken = () => {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user).access_token : undefined;
@@ -69,9 +70,9 @@ class MovieService extends ApiService {
       });
     }
   };
+  
   getToken = () => {
     const user = localStorage.getItem('user');
-    user && console.log(JSON.parse(user).access_token);
     return user ? JSON.parse(user).access_token : undefined;
   };
   getRelatedMovies = (payload) =>{
@@ -81,7 +82,12 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.POPULAR_MOVIES + "?numOfMovies=" + numOfMovies);
   }
   postMovie = (payload) =>{
-    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+    let formData = new FormData();
+    formData.append('image', payload.image);
+    formData.append('title', payload.title);
+    formData.append('genre', payload.genre);
+    formData.append('description', payload.description);
+    return this.apiClient.post(ENDPOINTS.MOVIES, formData);
   }
 
   

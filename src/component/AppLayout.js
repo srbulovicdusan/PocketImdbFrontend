@@ -30,10 +30,12 @@ class AppLayout extends React.Component {
         <Route exact path="/add/movieomdb" component={AddMovieOMDB}/>
         <Route exact path="/add/movie/" component={AddMovie}/>
         <Route exact path="/watchlist" component={Watchlist}/>
+        <Redirect from="/" to="/home"></Redirect>
+
       </div>
     ) : (
       <div>
-        <Redirect from="/" to="login"></Redirect>
+        <Redirect from="/" to="/login"></Redirect>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </div>
